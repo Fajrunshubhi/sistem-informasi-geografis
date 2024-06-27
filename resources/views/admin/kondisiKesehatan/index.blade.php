@@ -63,6 +63,7 @@
                         <td>{{ $data->latitude }}</td>
                         <td>{{ $data->longitude }}</td>
                         <td>
+                            @can('is_adminDesa', $data->pasien->desa)
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/data/kondisi-kesehatan/{{ $data->id }}/edit"
                                     class="badge bg-warning d-block mb-2"><i
@@ -76,6 +77,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

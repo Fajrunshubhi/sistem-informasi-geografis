@@ -42,6 +42,7 @@
                             </div>
                         </td>
                         <td class="align-middle">
+                            @can('is_adminDesa', $data)
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/desa/{{ $data->id }}/edit" class="badge bg-warning d-block mb-1"><i
                                         class="bi bi-pencil-square me-1"></i>
@@ -56,6 +57,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

@@ -41,6 +41,7 @@
                         <td>{{ $data->email }}</td>
                         <td>{{ $data->role }}</td>
                         <td>
+                            @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">
                                 <form action="{{ route('user.destroy.bysuperadmin', ['user' => $data->id]) }}"
                                     method="POST">
@@ -52,6 +53,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

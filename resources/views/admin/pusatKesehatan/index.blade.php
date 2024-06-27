@@ -50,6 +50,7 @@
                             </div>
                         </td>
                         <td>
+                            @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/data/pusat-kesehatan/{{ $data->id }}/edit"
                                     class="badge bg-warning d-block mb-2"><i
@@ -63,6 +64,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

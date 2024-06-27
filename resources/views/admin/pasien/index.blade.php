@@ -45,6 +45,7 @@
                         <td>{{ $data->no_tlpn }}</td>
                         <td>{{ $data->alamat }} </td>
                         <td>
+                            @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/pasien/{{ $data->id }}/edit" class="badge bg-warning d-block mb-2"><i
                                         class="bi bi-pencil-square me-1"></i>Edit</a>
@@ -57,6 +58,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

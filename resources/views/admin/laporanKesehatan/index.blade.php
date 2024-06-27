@@ -42,6 +42,7 @@
                             }}</td>
                         <td>{{ $data->file }}</td>
                         <td class="align-middle">
+                            @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/laporan-kesehatan/{{ $data->id }}/edit"
                                     class="badge bg-warning d-block mb-2"><i
@@ -55,6 +56,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

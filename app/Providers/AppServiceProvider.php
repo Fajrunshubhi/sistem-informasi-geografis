@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Desa;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('is_superAdmin', function (User $user) {
             return Auth::user()->role == 'Super Admin';
+        });
+        Gate::define('is_adminDesa', function (User $user, Desa $desa) {
+            return Auth::user()->desa->nama_desa == $desa->nama_desa;
         });
     }
 }

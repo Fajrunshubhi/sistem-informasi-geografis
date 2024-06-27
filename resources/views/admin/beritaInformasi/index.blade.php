@@ -33,6 +33,7 @@
                         <td>Isi judul berita dan informasi kesehatan</td>
                         <td>Gambar</td>
                         <td>
+                            @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">
                                 <a href="#" class="badge bg-warning d-block mb-2"><i
                                         class="bi bi-pencil-square"></i></a>
@@ -44,6 +45,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endcan
                         </td>
                     </tr>
                     <tr>
