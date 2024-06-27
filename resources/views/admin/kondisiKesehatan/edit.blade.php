@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <label for="nama-pasien" class="form-label">Nama Pasien</label>
                                     <input class="form-control" type="text" readonly required id="nama-pasien"
-                                        value="{{ $kondisi_kesehatan->pasien->nama }} | {{ $kondisi_kesehatan->pasien->umur }} Tahun | {{ $kondisi_kesehatan->pasien->jenis_kelamin }}   ----->   Desa {{ $data->desa->nama_desa }}" />
+                                        value="{{ $kondisi_kesehatan->pasien->nama }} | {{ $kondisi_kesehatan->pasien->umur }} Tahun | {{ $kondisi_kesehatan->pasien->jenis_kelamin }}   ----->   Desa {{ $kondisi_kesehatan->pasien->desa->nama_desa }}" />
                                 </div>
                             </div>
                             <div class="row mb-3">

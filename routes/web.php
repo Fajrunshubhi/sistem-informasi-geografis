@@ -33,18 +33,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/user', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/admin/data/pusat-kesehatan', AdminPusatKesehatanController::class)->middleware(['auth']);
-Route::resource('/admin/data/fasilitas-kesehatan', AdminFasilitasKesehatanController::class)->middleware(['auth']);
-Route::resource('/admin/data/layanan-kesehatan', AdminLayananKesehatanController::class)->middleware(['auth']);
-Route::resource('/admin/data/kondisi-kesehatan', AdminKondisiKesehatanController::class)->middleware(['auth']);
+Route::resource('/admin/data/pusat-kesehatan', AdminPusatKesehatanController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/data/fasilitas-kesehatan', AdminFasilitasKesehatanController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/data/layanan-kesehatan', AdminLayananKesehatanController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/data/kondisi-kesehatan', AdminKondisiKesehatanController::class)->middleware(['auth', 'check_desa']);
 Route::resource('/admin/data/kategori-fasilitas', AdminKategoriFasilitasController::class)->middleware(['auth']);
 
-Route::resource('/admin/pasien', AdminPasienController::class)->middleware(['auth']);
+Route::resource('/admin/pasien', AdminPasienController::class)->middleware(['auth', 'check_desa']);
 Route::resource('/admin/penyakit', AdminPenyakitController::class)->middleware(['auth']);
-Route::resource('/admin/pemantauan', AdminPemantauanController::class)->middleware(['auth']);
-Route::resource('/admin/laporan-kesehatan', AdminLaporanKesehatanController::class)->middleware(['auth']);
-Route::resource('/admin/desa', AdminDesaController::class)->middleware(['auth']);
-Route::resource('/admin/berita-informasi', AdminBeritaInformasiController::class)->middleware(['auth']);
+Route::resource('/admin/pemantauan', AdminPemantauanController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/laporan-kesehatan', AdminLaporanKesehatanController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/desa', AdminDesaController::class)->middleware(['auth', 'check_desa']);
+Route::resource('/admin/berita-informasi', AdminBeritaInformasiController::class)->middleware(['auth', 'check_desa']);
 Route::resource('/admin/profil-kecamatan', AdminProfilKecamatanController::class)->middleware(['auth']);
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware(['auth', 'is_SuperAdmin']);

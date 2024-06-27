@@ -5,6 +5,13 @@
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
             Kesehatan /</a> Berita dan Informasi Kesehatan
     </h4>
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible col-sm-8" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="card">
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Tabel Data Berita dan Informasi Kesehatan</h5>
@@ -26,48 +33,39 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($berita_informasi as $data)
                     <tr>
-                        <td>Fajrun Shubhi</td>
-                        <td>Super Admin</td>
-                        <td>Judul Berita dan Informasi Kesehatan</td>
-                        <td>Isi judul berita dan informasi kesehatan</td>
-                        <td>Gambar</td>
+                        <td>{{ $data->user->nama }}</td>
+                        <td>{{ $data->user->role }}</td>
+                        <td>{{ $data->judul }}</td>
+                        <td>{{ (str_word_count($data->isi) > 10 ? substr($data->isi,0,75)."..."
+                            : $data->isi)
+                            }}</td>
+                        <td class="p-0">
+                            <div class="w-75" style="max-height: 350px; overflow: hidden;">
+                                <img src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->judul }}"
+                                    class="img-fluid my-2">
+                            </div>
+                        </td>
                         <td>
-                            @can('is_adminDesa', $data->desa)
+                            @can('is_adminDesa', $data->user->desa)
                             <div class="container-aksi align-items-center">
-                                <a href="#" class="badge bg-warning d-block mb-2"><i
-                                        class="bi bi-pencil-square"></i></a>
-                                <form action="#" method="POST">
+                                <a href="/admin/berita-informasi/{{ $data->id }}/edit"
+                                    class="badge bg-warning d-block mb-2"><i
+                                        class="bi bi-pencil-square me-1"></i>Edit</a>
+                                <form action="/admin/berita-informasi/{{ $data->id }}" method="POST">
                                     @method('delete')
                                     @csrf
-                                    <button class="badge bg-danger border-0 w-100"><i class="bi bi-trash"
-                                            onclick="return confirm('Are you sure?')"></i>
+                                    <button class="badge bg-danger border-0 w-100"
+                                        onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i
+                                            class="bi bi-trash me-1"></i>Hapus
                                     </button>
                                 </form>
                             </div>
                             @endcan
                         </td>
                     </tr>
-                    <tr>
-                        <td>Fajrun Shubhi</td>
-                        <td>Super Admin</td>
-                        <td>Judul Berita dan Informasi Kesehatan</td>
-                        <td>Isi judul berita dan informasi kesehatan</td>
-                        <td>Gambar</td>
-                        <td>
-                            <div class="container-aksi align-items-center">
-                                <a href="#" class="badge bg-warning d-block mb-2"><i
-                                        class="bi bi-pencil-square"></i></a>
-                                <form action="#" method="POST">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="badge bg-danger border-0 w-100"><i class="bi bi-trash"
-                                            onclick="return confirm('Are you sure?')"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
                 <tfoot class="bg-primary">
                     <tr>

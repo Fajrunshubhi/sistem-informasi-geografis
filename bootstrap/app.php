@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckDesa;
 use App\Http\Middleware\IsSuperAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'is_SuperAdmin' => IsSuperAdmin::class
+            'is_SuperAdmin' => IsSuperAdmin::class,
+            'check_desa' => CheckDesa::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

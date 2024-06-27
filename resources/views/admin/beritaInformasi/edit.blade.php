@@ -13,31 +13,62 @@
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="/admin/berita-informasi/{{ $berita_informasi->id }}"
+                            enctype="multipart/form-data">
+                            @method('put')
+                            @csrf
                             <div class="row mb-3">
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <label class="form-label" for="judul">Judul</label>
-                                    <input type="text" id="judul" class="form-control" placeholder="Judul" />
+                                    <input type="text" id="judul"
+                                        class="form-control @error('judul') is-invalid @enderror"
+                                        value="{{ old('judul', $berita_informasi->judul) }}" name="judul"
+                                        placeholder="Judul berita dan informasi kesehatan" required />
+                                    @error ('judul')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="gambar-berita">Gambar</label>
-                                    <input type="file" id="gambar-berita" class="form-control" />
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="gambar" class="form-label">Gambar</label>
+                                            <input type="hidden" name="oldImage"
+                                                value="{{ $berita_informasi->gambar }}">
+                                            <input class="form-control @error('gambar') is-invalid @enderror"
+                                                type="file" name="gambar" id="gambar" onchange="previewImage()"
+                                                value="{{ old('gambar', $berita_informasi->gambar) }}" />
+                                            @error ('gambar')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="" alt="" class="img-preview img-fluid mb-3 col-sm-5">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label class="form-label" for="isi-berita-informasi">Isi Berita dan Informasi
+                                    <label class="form-label" for="isi">Isi Berita dan Informasi
                                         Kesehatan</label>
-                                    <input id="isi-berita-informasi" type="hidden" name="isi-berita-informasi">
-                                    <trix-editor input="isi-berita-informasi"
-                                        placeholder="Isi berita dan informasi kesehatan">
+                                    @error('isi')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+
+                                    <input id="isi" type="hidden" name="isi"
+                                        value="{{ old('isi', $berita_informasi->isi) }}">
+                                    <trix-editor input="isi" placeholder="Isi berita dan informasi kesehatan">
                                     </trix-editor>
                                 </div>
                             </div>
                             <div class="row mb-3 mt-5">
                                 <div class="col-12 d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
-                                    <button type="submit" class="btn btn-danger">Batal</button>
+                                    <a class="btn btn-danger" href="/admin/berita-informasi">Batal</a>
                                 </div>
                             </div>
                         </form>
@@ -55,5 +86,16 @@
             width: 'resolve'
         });
     });
+
+    function previewImage() {
+        const image = document.querySelector('#gambar');
+        const imgPreview = document.querySelector('.img-preview')
+        imgPreview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function (oFREvent){
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
 </script>
 @endpush

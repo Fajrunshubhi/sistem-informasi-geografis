@@ -47,9 +47,19 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6" style="margin-top: 3px">
-                                    <label class="form-label d-block" for="select-tingkat-keparahan">Tingkat
+                                <div class="col-md-6 ">
+                                    <label class="form-label" for="select-tingkat-keparahan">Tingkat
                                         Keparahan</label>
+                                    <button type="button" class="badge bg-primary border-0 text-nowrap"
+                                        data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="bottom"
+                                        data-bs-html="true"
+                                        data-bs-content="<p>1. Ringan (Mild): Gejala yang ringan dan tidak mengganggu aktivitas sehari-hari. Tidak memerlukan intervensi medis yang signifikan. </p> 
+                                <p>2. Sedang (Moderate): Gejala yang cukup mengganggu aktivitas sehari-hari dan memerlukan perawatan medis untuk meredakan gejala atau mempercepat pemulihan. </p> 
+                                <p>3. Berat (Severe): Gejala yang serius dan memerlukan perawatan medis intensif.</p>
+                                <p>4. Kritis (Critical): Kondisi yang mengancam nyawa dan memerlukan perawatan segera di unit perawatan intensif (ICU) atau setara. Memerlukan intervensi medis yang kompleks</p>"
+                                        title="Tingkat Keparahan ?">
+                                        ?
+                                    </button>
                                     <select class="form-control select @error('tingkat_keparahan') is-invalid @enderror"
                                         value="{{ old('tingkat_keparahan') }}" name="tingkat_keparahan" required
                                         id="select-tingkat-keparahan">
