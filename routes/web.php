@@ -47,7 +47,7 @@ Route::resource('/admin/desa', AdminDesaController::class)->middleware(['auth'])
 Route::resource('/admin/berita-informasi', AdminBeritaInformasiController::class)->middleware(['auth']);
 Route::resource('/admin/profil-kecamatan', AdminProfilKecamatanController::class)->middleware(['auth']);
 
-Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware(['auth']);
+Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware(['auth', 'is_SuperAdmin']);
 Route::delete('/admin/user/{user}', [AdminUserController::class, 'destroy'])->middleware(['auth'])->name('user.destroy.bysuperadmin');
 
 

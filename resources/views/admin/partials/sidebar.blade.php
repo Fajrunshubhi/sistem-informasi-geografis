@@ -100,11 +100,14 @@
                 <div data-i18n="Analytics">Profil Kecamatan</div>
             </a>
         </li>
+
+        @can('is_superAdmin')
         <li class="menu-item {{ Request::is('admin/user*') ? 'active' : '' }}">
             <a href="/admin/user" class="menu-link">
                 <i class="bi bi-people menu-icon tf-icons"></i>
                 <div data-i18n="Analytics">Users</div>
             </a>
         </li>
+        @endcan
     </ul>
 </aside>
