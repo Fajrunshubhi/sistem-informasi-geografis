@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('desa_id');
+            $table->unsignedBigInteger('desa_id');
             $table->string('nama');
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('no_tlpn');
             $table->string('alamat');
             $table->timestamps();
+
+            $table->foreign('desa_id')->references('id')->on('desa')->onDelete('cascade');
         });
     }
 

@@ -18,7 +18,7 @@ class AdminFasilitasKesehatanController extends Controller
     {
         return response()->view('admin.fasilitaskesehatan.index', [
             'title' => 'Fasilitas Kesehatan',
-            'fasilitas_kesehatan' => FasilitasKesehatan::all()
+            'fasilitas_kesehatan' => FasilitasKesehatan::latest()->get()
         ]);
     }
 
@@ -40,7 +40,7 @@ class AdminFasilitasKesehatanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'kategori_id' => ['required', 'exists:kategori_fasilitas,id'],
             'nama_fasilitas' => ['required'],
             'alamat' => ['required'],
@@ -83,7 +83,7 @@ class AdminFasilitasKesehatanController extends Controller
     public function update(Request $request, FasilitasKesehatan $fasilitas_kesehatan)
     {
         $validatedData = $request->validate([
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'kategori_id' => ['required', 'exists:kategori_fasilitas,id'],
             'nama_fasilitas' => ['required'],
             'alamat' => ['required'],

@@ -5,6 +5,12 @@
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
             Kesehatan /</a> Desa
     </h4>
+    @error ('nama_desa')
+    <div class="alert alert-danger alert-dismissible col-sm-8" role="alert">
+        {{ $message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @enderror
     <div class="card">
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Tambah Data Desa</h5>

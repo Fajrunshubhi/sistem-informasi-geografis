@@ -17,7 +17,7 @@ class AdminPemantauanController extends Controller
     {
         return response()->view('admin.pemantauan.index', [
             'title' => 'Pemantauan',
-            'pemantauan' => Pemantauan::all()
+            'pemantauan' => Pemantauan::latest()->get()
         ]);
     }
 
@@ -39,15 +39,19 @@ class AdminPemantauanController extends Controller
     {
         $validatedData = $request->validate([
             'kondisi_kesehatan_id' => [
-                'required', 'exists:kondisi_kesehatan,id',
-                Rule::unique('pemantauan')->where(function ($query) use ($request) {
-                    return $query->where('kondisi_kesehatan_id', $request->kondisi_kesehatan_id);
-                })
+                'required', 'exists:kondisi_kesehatan,id'
             ],
             'waktu_pemantauan' => ['required'],
             'tingkat_keparahan' => ['required', 'in:Ringan (Mild),Sedang (Moderate),Berat (Severe),Kritis (Critical)'],
             'keterangan' => ['required']
         ]);
+
+        $exists = Pemantauan::where('kondisi_kesehatan_id', $validatedData['kondisi_kesehatan_id'])
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['kondisi_kesehatan_id' => 'Kondisi Kesehatan Dengan ID Ini Sudah Dilakukan Pemantauan!']);
+        }
         Pemantauan::create($validatedData);
         return redirect('/admin/pemantauan')->with('success', 'Data Pemantauan Penyakit Berhasil Ditambah!');
     }
@@ -85,6 +89,14 @@ class AdminPemantauanController extends Controller
             'tingkat_keparahan' => ['required', 'in:Ringan (Mild),Sedang (Moderate),Berat (Severe),Kritis (Critical)'],
             'keterangan' => ['required']
         ]);
+
+        $exists = Pemantauan::where('kondisi_kesehatan_id', $validatedData['kondisi_kesehatan_id'])
+            ->where('id', '!=', $pemantauan->id)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['kondisi_kesehatan_id' => 'Kondisi Kesehatan Dengan ID Ini Sudah Dilakukan Pemantauan!']);
+        }
 
         Pemantauan::where('id', $pemantauan->id)
             ->update($validatedData);

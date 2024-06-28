@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('kondisi_kesehatan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pasien_id');
-            $table->foreignId('penyakit_id');
+            $table->string('pasien_id');
+            $table->unsignedBigInteger('penyakit_id');
             $table->dateTime('waktu_terdeteksi');
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
+            $table->foreign('penyakit_id')->references('id')->on('penyakit')->onDelete('cascade');
         });
     }
 

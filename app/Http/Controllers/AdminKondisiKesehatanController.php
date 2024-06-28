@@ -17,7 +17,7 @@ class AdminKondisiKesehatanController extends Controller
     {
         return response()->view('admin.kondisiKesehatan.index', [
             'title' => 'Kondisi Kesehatan',
-            'kondisi_kesehatan' => KondisiKesehatan::all()
+            'kondisi_kesehatan' => KondisiKesehatan::latest()->get()
         ]);
     }
 
@@ -45,6 +45,15 @@ class AdminKondisiKesehatanController extends Controller
             'latitude' => ['required'],
             'longitude' => ['required']
         ]);
+
+        // Cek apakah kombinasi pasien_id dan penyakit sudah ada
+        $exists = KondisiKesehatan::where('pasien_id', $validatedData['pasien_id'])
+            ->where('penyakit_id', $validatedData['penyakit_id'])
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['pasien_id' => 'Pasien dengan penyakit tersebut sudah ada.']);
+        }
 
         KondisiKesehatan::create($validatedData);
         return redirect('/admin/data/kondisi-kesehatan')->with('success', 'Data Kondisi Kesehatan Berhasil Ditambah!');
@@ -83,6 +92,15 @@ class AdminKondisiKesehatanController extends Controller
             'latitude' => ['required'],
             'longitude' => ['required']
         ]);
+        // Cek apakah kombinasi pasien_id dan penyakit sudah ada
+        $exists = KondisiKesehatan::where('pasien_id', $validatedData['pasien_id'])
+            ->where('penyakit_id', $validatedData['penyakit_id'])
+            ->where('id', '!=', $kondisi_kesehatan->id)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['pasien_id' => 'Pasien dengan penyakit tersebut sudah ada.']);
+        }
 
         KondisiKesehatan::where('id', $kondisi_kesehatan->id)
             ->update($validatedData);

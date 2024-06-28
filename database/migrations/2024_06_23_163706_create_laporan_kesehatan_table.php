@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('laporan_kesehatan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desa_id');
+            $table->unsignedBigInteger('desa_id');
             $table->string('judul_laporan');
             $table->longText('deskripsi');
             $table->string('file')->nullable();
             $table->timestamps();
+
+            $table->foreign('desa_id')->references('id')->on('desa')->onDelete('cascade');
         });
     }
 

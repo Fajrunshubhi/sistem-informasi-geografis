@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pusat_kesehatan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desa_id');
+            $table->unsignedBigInteger('desa_id');
             $table->string('nama_pusat_kesehatan');
             $table->string('alamat');
             $table->string('no_tlpn');
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamps();
+
+            $table->foreign('desa_id')->references('id')->on('desa')->onDelete('cascade');
         });
     }
 

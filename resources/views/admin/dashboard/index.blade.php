@@ -51,12 +51,12 @@
 
   
      // Data dari PHP ke JavaScript
-     var desas = @json($desa); // Konversi data desa ke JSON
+     var desa = @json($desa); // Konversi data desa ke JSON
 
 
 
 // Tambahkan GeoJSON ke peta
-desas.forEach(function(desa) {
+desa.forEach(function(desa) {
     // Pastikan setiap desa memiliki geojson dan warna
     if (desa.geojson && desa.warna) {
         L.geoJSON(JSON.parse(desa.geojson), {

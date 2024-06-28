@@ -15,7 +15,7 @@ class AdminKategoriFasilitasController extends Controller
     {
         return response()->view('admin.kategoriFasilitas.index', [
             'title' => "Kategori Fasilitas",
-            'kategoriFasilitas' => KategoriFasilitas::all()
+            'kategoriFasilitas' => KategoriFasilitas::latest()->get()
         ]);
     }
 

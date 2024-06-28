@@ -17,7 +17,7 @@ class AdminLaporanKesehatanController extends Controller
     {
         return response()->view('admin.laporanKesehatan.index', [
             'title' => 'Laporan Kesehatan',
-            'laporan_kesehatan' => LaporanKesehatan::all()
+            'laporan_kesehatan' => LaporanKesehatan::latest()->get()
         ]);
     }
 
@@ -38,7 +38,7 @@ class AdminLaporanKesehatanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'judul_laporan' => ['required'],
             'deskripsi' => ['required'],
             'file' => ['nullable', 'file', 'max:20480']
@@ -80,7 +80,7 @@ class AdminLaporanKesehatanController extends Controller
     public function update(Request $request, LaporanKesehatan $laporan_kesehatan)
     {
         $validatedData = $request->validate([
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'judul_laporan' => ['required'],
             'deskripsi' => ['required'],
             'file' => ['nullable', 'file', 'max:20480']

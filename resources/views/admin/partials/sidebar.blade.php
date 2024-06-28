@@ -82,12 +82,14 @@
                 <div data-i18n="Analytics">Laporan Kesehatan</div>
             </a>
         </li>
+        @can('is_superAdmin')
         <li class="menu-item {{ Request::is('admin/desa*') ? 'active' : '' }}">
             <a href="/admin/desa" class="menu-link">
                 <i class="bi bi-houses menu-icon tf-icons"></i>
                 <div data-i18n="Analytics">Desa</div>
             </a>
         </li>
+        @endcan
         <li class="menu-item {{ Request::is('admin/berita-informasi*') ? 'active' : '' }}">
             <a href="/admin/berita-informasi" class="menu-link">
                 <i class="bi bi-newspaper menu-icon tf-icons"></i>

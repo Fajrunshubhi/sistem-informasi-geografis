@@ -6,6 +6,7 @@ use App\Models\Desa;
 use App\Models\PusatKesehatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
 class AdminPusatKesehatanController extends Controller
@@ -17,7 +18,7 @@ class AdminPusatKesehatanController extends Controller
     {
         return response()->view('admin.pusatKesehatan.index', [
             "title" => "Pusat Kesehatan",
-            "pusat_kesehatan" => PusatKesehatan::all()
+            "pusat_kesehatan" => PusatKesehatan::latest()->get()
         ]);
     }
 
@@ -38,7 +39,7 @@ class AdminPusatKesehatanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'nama_pusat_kesehatan' => ['required'],
             'alamat' => ['required'],
             'no_tlpn' => ['required'],
@@ -80,7 +81,7 @@ class AdminPusatKesehatanController extends Controller
     public function update(Request $request, PusatKesehatan $pusatKesehatan)
     {
         $rules = [
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'nama_pusat_kesehatan' => ['required'],
             'alamat' => ['required'],
             'no_tlpn' => ['required'],

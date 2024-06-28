@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('berita_informasi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('judul');
             $table->string('gambar')->nullable();
             $table->longText('isi');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

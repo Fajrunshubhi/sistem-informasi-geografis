@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
-use App\Models\KategoriFasilitas;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,7 +15,7 @@ class AdminDesaController extends Controller
     {
         return response()->view('admin.desa.index', [
             'title' => 'Desa',
-            'dataDesa' => Desa::all()
+            'dataDesa' => Desa::latest()->get()
         ]);
     }
 
@@ -36,8 +35,8 @@ class AdminDesaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_desa' => ['required', 'unique:desas'],
-            'warna' => ['required', 'unique:desas'],
+            'nama_desa' => ['required', 'unique:desa'],
+            'warna' => ['required', 'unique:desa'],
             'geojson' => ['required']
         ]);
         Desa::create($validatedData);
@@ -72,10 +71,10 @@ class AdminDesaController extends Controller
             'geojson' => ['required']
         ];
         if ($request->nama_desa != $desa->nama_desa) {
-            $rules['nama_desa'] = ['required', 'unique:desas'];
+            $rules['nama_desa'] = ['required', 'unique:desa'];
         };
         if ($request->warna != $desa->warna) {
-            $rules['warna'] = ['required', 'unique:desas'];
+            $rules['warna'] = ['required', 'unique:desa'];
         };
 
         $validatedData = $request->validate($rules);

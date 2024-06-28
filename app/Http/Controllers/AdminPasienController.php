@@ -16,7 +16,7 @@ class AdminPasienController extends Controller
     {
         return response()->view('admin.pasien.index', [
             'title' => 'Pasien',
-            'pasien' => Pasien::all()
+            'pasien' => Pasien::latest()->get()
         ]);
     }
 
@@ -38,14 +38,19 @@ class AdminPasienController extends Controller
     {
         $validatedData = $request->validate([
             'id' => ['required', 'string'],
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'nama' => ['required'],
             'umur' => ['required', 'max:100'],
             'jenis_kelamin' => ['required', 'in:Laki-laki,Perempuan'],
             'no_tlpn' => ['required'],
             'alamat' => ['required'],
         ]);
-        logger()->info('Nilai ID sebelum menyimpan:', ['id' => $validatedData['id']]);
+        $exists = Pasien::where('id', $validatedData['id'])
+            ->exists();
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['id' => 'ID Pasien Sudah Digunakan!']);
+        }
+
         Pasien::create($validatedData);
         return redirect('/admin/pasien')->with('success', 'Data Pasien Berhasil Ditambah!');
     }
@@ -77,7 +82,7 @@ class AdminPasienController extends Controller
     {
         $validatedData = $request->validate([
             'id' => ['required:string'],
-            'desa_id' => ['required', 'exists:desas,id'],
+            'desa_id' => ['required', 'exists:desa,id'],
             'nama' => ['required'],
             'umur' => ['required', 'max:100'],
             'jenis_kelamin' => ['required', 'in:Laki-laki,Perempuan'],

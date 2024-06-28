@@ -15,7 +15,7 @@ class AdminPenyakitController extends Controller
     {
         return response()->view('admin.penyakit.index', [
             'title' => 'Penyakit',
-            'penyakit' => Penyakit::all()
+            'penyakit' => Penyakit::latest()->get()
         ]);
     }
 
@@ -42,6 +42,13 @@ class AdminPenyakitController extends Controller
             'metode_pengobatan' => ['required'],
             'tindakan_pencegahan' => ['required'],
         ]);
+
+        $exists = Penyakit::where('nama_penyakit', $validatedData['nama_penyakit'])
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['nama_penyakit' => 'Penyakit sudah ada!.']);
+        }
 
         Penyakit::create($validatedData);
         return redirect('/admin/penyakit')->with('success', 'Data Penyakit Berhasil Ditambah!');
@@ -79,7 +86,13 @@ class AdminPenyakitController extends Controller
             'metode_pengobatan' => ['required'],
             'tindakan_pencegahan' => ['required'],
         ]);
+        $exists = Penyakit::where('nama_penyakit', $validatedData['nama_penyakit'])
+            ->where('id', '!=', $penyakit->id)
+            ->exists();
 
+        if ($exists) {
+            return redirect()->back()->withInput()->withErrors(['nama_penyakit' => 'Penyakit sudah ada!.']);
+        }
         Penyakit::where('id', $penyakit->id)
             ->update($validatedData);
         return redirect('/admin/penyakit')->with('success', 'Data Penyakit Berhasil Diedit!');

@@ -3,8 +3,15 @@
 @section('main-container')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
-            Kesehatan /</a> Data Pasien
+            Kesehatan /</a> <a href="/admin/pasien">Data Pasien</a>
     </h4>
+    @error ('desa_id')
+    <div class="alert alert-danger alert-dismissible col-sm-8" role="alert">
+        {{ $message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @enderror
+
     <div class="card">
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Edit Data Pasien</h5>
@@ -20,7 +27,8 @@
                                 <div class="col-md-4">
                                     <label class="form-label" for="id">NIK</label>
                                     <input type="text" class="form-control @error('id') is-invalid @enderror" id="id"
-                                        name="id" value="{{ old('id', $pasien->id) }}" placeholder="NIK" required />
+                                        name="id" value="{{ old('id', $pasien->id) }}" placeholder="NIK" required
+                                        readonly />
                                     @error ('id')
                                     <div class="invalid-feedback">
                                         {{ $message }}

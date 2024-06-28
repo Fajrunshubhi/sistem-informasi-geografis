@@ -34,8 +34,9 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $data)
+                    @if ($data->id !== Auth::id())
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loop->iteration-1 }}</td>
                         <td>{{ $data->desa->nama_desa }}</td>
                         <td>{{ $data->nama }}</td>
                         <td>{{ $data->email }}</td>
@@ -56,6 +57,8 @@
                             @endcan
                         </td>
                     </tr>
+
+                    @endif
                     @endforeach
                 </tbody>
                 <tfoot class="bg-primary">

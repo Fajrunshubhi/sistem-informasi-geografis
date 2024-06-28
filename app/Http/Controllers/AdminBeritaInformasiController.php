@@ -18,7 +18,7 @@ class AdminBeritaInformasiController extends Controller
     {
         return response()->view('admin.beritaInformasi.index', [
             'title' => 'Berita dan Informasi',
-            'berita_informasi' => BeritaInformasi::all()
+            'berita_informasi' => BeritaInformasi::latest()->get()
         ]);
     }
 

@@ -3,8 +3,14 @@
 @section('main-container')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
-            Kesehatan /</a> Data Penyakit
+            Kesehatan /</a> <a href="/admin/penyakit">Data Penyakit</a>
     </h4>
+    @error ('nama_penyakit')
+    <div class="alert alert-danger alert-dismissible col-sm-8" role="alert">
+        {{ $message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @enderror
     <div class="card">
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Tambah Data Penyakit</h5>

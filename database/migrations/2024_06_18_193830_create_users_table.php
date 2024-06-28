@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desa_id');
+            $table->unsignedBigInteger('desa_id');
             $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('role', ['Admin', 'Super Admin']);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('desa_id')->references('id')->on('desa')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
