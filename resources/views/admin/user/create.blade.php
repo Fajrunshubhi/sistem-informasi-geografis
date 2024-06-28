@@ -3,7 +3,7 @@
 @section('main-container')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
-            Kesehatan /</a> Data Users
+            Kesehatan /</a> <a href="/admin/user">Data Users</a>
     </h4>
     <div class="card">
         <div class="d-flex justify-content-between">
