@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KondisiKesehatan;
 use App\Models\Pemantauan;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
@@ -17,6 +18,7 @@ class AdminPemantauanController extends Controller
     {
         return response()->view('admin.pemantauan.index', [
             'title' => 'Pemantauan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pemantauan' => Pemantauan::latest()->get()
         ]);
     }
@@ -28,6 +30,7 @@ class AdminPemantauanController extends Controller
     {
         return response()->view('admin.pemantauan.create', [
             'title' => 'Pemantauan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kondisi_kesehatan' => KondisiKesehatan::all()
         ]);
     }
@@ -71,6 +74,7 @@ class AdminPemantauanController extends Controller
     {
         return response()->view('admin.pemantauan.edit', [
             'title' => 'Pemantauan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pemantauan' => $pemantauan,
             'kondisi_kesehatan' => KondisiKesehatan::all()
         ]);

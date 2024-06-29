@@ -3,8 +3,15 @@
 @section('main-container')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><a href="/admin/dashboard" class="text-muted fw-light">SIG | Pemetaan Sebaran
-            Kesehatan /</a> Profil Kecamatan
+            Kesehatan /</a> <a href="/admin/profil-kecamatan">Profil Kecamatan</a>
     </h4>
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible col-sm-8" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="card">
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Tabel Data Profil Kecamatan</h5>
@@ -28,25 +35,21 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Tunjungan</td>
-                        <td>Fajrun@gmail.com</td>
-                        <td>081227876535</td>
-                        <td>Deskripsi Kecamatan</td>
-                        <td>Jalan Tunjungan No. 10, RT 01 RW 02, Desa Tunjungan, Kecamatan Ngombol, Kab. Purworejo, Jawa
-                            Tengah, </td>
-                        <td>-7.835607</td>
-                        <td>109.943748</td>
+                        <td>{{ $profil_kecamatan->nama }}</td>
+                        <td>{{ $profil_kecamatan->email }}</td>
+                        <td>{{ $profil_kecamatan->no_tlpn }}</td>
+                        <td>{{ (str_word_count($profil_kecamatan->deskripsi) > 10 ?
+                            substr($profil_kecamatan->deskripsi,0,75)."..."
+                            : $profil_kecamatan->deskripsi)
+                            }}</td>
+                        <td>{{ $profil_kecamatan->alamat }}</td>
+                        <td>{{ $profil_kecamatan->latitude }}</td>
+                        <td>{{ $profil_kecamatan->longitude }}</td>
                         <td>
                             <div class="container-aksi align-items-center">
-                                <a href="#" class="badge bg-warning d-block mb-2"><i
-                                        class="bi bi-pencil-square"></i></a>
-                                <form action="#" method="POST">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="badge bg-danger border-0 w-100"><i class="bi bi-trash"
-                                            onclick="return confirm('Are you sure?')"></i>
-                                    </button>
-                                </form>
+                                <a href="/admin/profil-kecamatan/{{ $profil_kecamatan->id }}/edit"
+                                    class="badge bg-warning d-block mb-2"><i
+                                        class="bi bi-pencil-square me-1"></i>Edit</a>
                             </div>
                         </td>
                     </tr>

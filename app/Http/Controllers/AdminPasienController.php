@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Desa;
 use App\Models\Pasien;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,6 +17,7 @@ class AdminPasienController extends Controller
     {
         return response()->view('admin.pasien.index', [
             'title' => 'Pasien',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pasien' => Pasien::latest()->get()
         ]);
     }
@@ -27,6 +29,7 @@ class AdminPasienController extends Controller
     {
         return response()->view('admin.pasien.create', [
             'title' => 'Pasien',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => Desa::all()
         ]);
     }
@@ -70,6 +73,7 @@ class AdminPasienController extends Controller
     {
         return response()->view('admin.pasien.edit', [
             'title' => 'Pasien',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pasien' => $pasien,
             'desa' => Desa::all()
         ]);

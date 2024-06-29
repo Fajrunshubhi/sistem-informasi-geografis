@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfilKecamatan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,6 +18,7 @@ class AdminUserController extends Controller
     {
         return response()->view('admin.user.index', [
             'title' => 'Users',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'users' => User::all()
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Desa;
+use App\Models\ProfilKecamatan;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -23,6 +24,7 @@ class RegisteredUserController extends Controller
     {
         return response()->view('admin.user.create', [
             'title' => 'Users',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => Desa::all()
         ]);
     }

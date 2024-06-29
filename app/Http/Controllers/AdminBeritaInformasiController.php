@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BeritaInformasi;
+use App\Models\ProfilKecamatan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,8 @@ class AdminBeritaInformasiController extends Controller
     {
         return response()->view('admin.beritaInformasi.index', [
             'title' => 'Berita dan Informasi',
-            'berita_informasi' => BeritaInformasi::latest()->get()
+            'berita_informasi' => BeritaInformasi::latest()->get(),
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1)
         ]);
     }
 
@@ -29,6 +31,7 @@ class AdminBeritaInformasiController extends Controller
     {
         return response()->view('admin.beritaInformasi.create', [
             'title' => 'Berita dan Informasi',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'user' => User::all()
         ]);
     }
@@ -68,6 +71,7 @@ class AdminBeritaInformasiController extends Controller
     {
         return response()->view('admin.beritaInformasi.edit', [
             'title' => 'Berita dan Informasi',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'berita_informasi' => $berita_informasi,
             'user' => User::all()
         ]);
@@ -91,7 +95,7 @@ class AdminBeritaInformasiController extends Controller
             $validatedData['gambar'] = $request->file('gambar')->store('berita-informasi-images');
         }
 
-        $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['user_id'] = $berita_informasi->user_id;
         BeritaInformasi::where('id', $berita_informasi->id)
             ->update($validatedData);
         return redirect('/admin/berita-informasi')->with('success', 'Data Berita dan Informasi Kesehatan Berhasil Diedit!');

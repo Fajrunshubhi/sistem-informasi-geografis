@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penyakit;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,7 @@ class AdminPenyakitController extends Controller
     {
         return response()->view('admin.penyakit.index', [
             'title' => 'Penyakit',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'penyakit' => Penyakit::latest()->get()
         ]);
     }
@@ -25,7 +27,8 @@ class AdminPenyakitController extends Controller
     public function create(Request $request): Response
     {
         return response()->view('admin.penyakit.create', [
-            'title' => 'Penyakit'
+            'title' => 'Penyakit',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
         ]);
     }
 
@@ -69,6 +72,7 @@ class AdminPenyakitController extends Controller
     {
         return response()->view('admin.penyakit.edit', [
             'title' => 'Penyakit',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'penyakit' => $penyakit
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Desa;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class ProfileController extends Controller
     {
         return view('admin.user.edit', [
             'title' => 'User | Profil',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => Desa::all(),
             'user' => $request->user(),
         ]);

@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand justify-content-center">
         <a href="#" class="app-brand-link text-center pt-3">
-            <h3>Kecamatan Ngombol</h3>
+            <h3>Kecamatan {{ $profil_kecamatan->nama }}</h3>
         </a>
         <a href="javascript:void(0);"
             class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none py-2 px-2">
@@ -96,12 +96,14 @@
                 <div data-i18n="Analytics">Berita dan Informasi </div>
             </a>
         </li>
+        @can('is_superAdmin')
         <li class="menu-item {{ Request::is('admin/profil-kecamatan*') ? 'active' : '' }}">
             <a href="/admin/profil-kecamatan" class="menu-link">
                 <i class="bi bi-person-lines-fill menu-icon tf-icons"></i>
                 <div data-i18n="Analytics">Profil Kecamatan</div>
             </a>
         </li>
+        @endcan
 
         @can('is_superAdmin')
         <li class="menu-item {{ Request::is('admin/user*') ? 'active' : '' }}">

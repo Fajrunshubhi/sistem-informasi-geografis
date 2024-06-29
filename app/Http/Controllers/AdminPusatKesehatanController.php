@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
+use App\Models\ProfilKecamatan;
 use App\Models\PusatKesehatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,6 +19,7 @@ class AdminPusatKesehatanController extends Controller
     {
         return response()->view('admin.pusatKesehatan.index', [
             "title" => "Pusat Kesehatan",
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             "pusat_kesehatan" => PusatKesehatan::latest()->get()
         ]);
     }
@@ -29,6 +31,7 @@ class AdminPusatKesehatanController extends Controller
     {
         return response()->view('admin.pusatKesehatan.create', [
             "title" => "Pusat Kesehatan",
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => Desa::all()
         ]);
     }
@@ -70,6 +73,7 @@ class AdminPusatKesehatanController extends Controller
     {
         return response()->view('admin.pusatKesehatan.edit', [
             'title' => 'Pusat Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pusatKesehatan' => $pusatKesehatan,
             'desa' => Desa::all()
         ]);

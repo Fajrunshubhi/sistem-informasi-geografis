@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,7 @@ class AdminDesaController extends Controller
     {
         return response()->view('admin.desa.index', [
             'title' => 'Desa',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'dataDesa' => Desa::latest()->get()
         ]);
     }
@@ -25,7 +27,8 @@ class AdminDesaController extends Controller
     public function create(Request $request): Response
     {
         return response()->view('admin.desa.create', [
-            'title' => 'Desa'
+            'title' => 'Desa',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
         ]);
     }
 
@@ -58,6 +61,7 @@ class AdminDesaController extends Controller
     {
         return response()->view('admin.desa.edit', [
             'title' => 'Desa',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => $desa
         ]);
     }

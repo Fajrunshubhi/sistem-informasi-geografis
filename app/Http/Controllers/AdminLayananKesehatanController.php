@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Desa;
 use App\Models\LayananKesehatan;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,7 @@ class AdminLayananKesehatanController extends Controller
     {
         return response()->view('admin.layananKesehatan.index', [
             'title' => 'Layanan Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'layanan_kesehatan' => LayananKesehatan::latest()->get()
         ]);
     }
@@ -28,6 +30,7 @@ class AdminLayananKesehatanController extends Controller
     {
         return response()->view('admin.layananKesehatan.create', [
             'title' => 'Layanan Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'desa' => Desa::all()
         ]);
     }
@@ -69,6 +72,7 @@ class AdminLayananKesehatanController extends Controller
     {
         return response()->view('admin.layananKesehatan.edit', [
             'title' => 'Layanan Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'layanan_kesehatan' => $layanan_kesehatan,
             'desa' => Desa::all()
         ]);

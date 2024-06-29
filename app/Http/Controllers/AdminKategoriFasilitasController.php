@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriFasilitas;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,7 @@ class AdminKategoriFasilitasController extends Controller
     {
         return response()->view('admin.kategoriFasilitas.index', [
             'title' => "Kategori Fasilitas",
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kategoriFasilitas' => KategoriFasilitas::latest()->get()
         ]);
     }
@@ -25,6 +27,7 @@ class AdminKategoriFasilitasController extends Controller
     public function create(Request $request): Response
     {
         return response()->view('admin.kategoriFasilitas.create', [
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'title' => 'Kategori Fasilitas',
         ]);
     }
@@ -56,6 +59,7 @@ class AdminKategoriFasilitasController extends Controller
     {
         return response()->view('admin.kategoriFasilitas.edit', [
             'title' => 'Edit Kategori Fasilitas',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kategoriFasilitas' => $kategori_fasilita
         ]);
     }

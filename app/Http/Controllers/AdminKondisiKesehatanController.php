@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KondisiKesehatan;
 use App\Models\Pasien;
 use App\Models\Penyakit;
+use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,6 +18,7 @@ class AdminKondisiKesehatanController extends Controller
     {
         return response()->view('admin.kondisiKesehatan.index', [
             'title' => 'Kondisi Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kondisi_kesehatan' => KondisiKesehatan::latest()->get()
         ]);
     }
@@ -28,6 +30,7 @@ class AdminKondisiKesehatanController extends Controller
     {
         return response()->view('admin.kondisiKesehatan.create', [
             'title' => 'Kondisi Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pasien' => Pasien::all(),
             'penyakit' => Penyakit::all()
         ]);
@@ -74,6 +77,7 @@ class AdminKondisiKesehatanController extends Controller
     {
         return response()->view('admin.kondisiKesehatan.edit', [
             'title' => 'Kondisi Kesehatan',
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kondisi_kesehatan' => $kondisi_kesehatan,
             'pasien' => Pasien::all(),
             'penyakit' => Penyakit::all()

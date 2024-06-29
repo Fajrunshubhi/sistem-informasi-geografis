@@ -45,7 +45,7 @@ Route::resource('/admin/pemantauan', AdminPemantauanController::class)->middlewa
 Route::resource('/admin/laporan-kesehatan', AdminLaporanKesehatanController::class)->middleware(['auth', 'check_desa', 'desa_validation']);
 Route::resource('/admin/desa', AdminDesaController::class)->middleware(['auth', 'check_desa', 'is_SuperAdmin']);
 Route::resource('/admin/berita-informasi', AdminBeritaInformasiController::class)->middleware(['auth', 'check_desa']);
-Route::resource('/admin/profil-kecamatan', AdminProfilKecamatanController::class)->middleware(['auth']);
+Route::resource('/admin/profil-kecamatan', AdminProfilKecamatanController::class)->middleware(['auth', 'is_SuperAdmin']);
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware(['auth', 'is_SuperAdmin']);
 Route::delete('/admin/user/{user}', [AdminUserController::class, 'destroy'])->middleware(['auth'])->name('user.destroy.bysuperadmin');
