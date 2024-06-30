@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DesaExport;
 use App\Models\Desa;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminDesaController extends Controller
 {
@@ -19,6 +21,13 @@ class AdminDesaController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'dataDesa' => Desa::latest()->get()
         ]);
+    }
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Desa' . $currentDateTime . '.xlsx';
+        return Excel::download(new DesaExport, $fileName);
     }
 
     /**

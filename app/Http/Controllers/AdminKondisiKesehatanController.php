@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KondisiKesehatanExport;
 use App\Models\KondisiKesehatan;
 use App\Models\Pasien;
 use App\Models\Penyakit;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminKondisiKesehatanController extends Controller
 {
@@ -21,6 +23,14 @@ class AdminKondisiKesehatanController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kondisi_kesehatan' => KondisiKesehatan::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Kondisi_Kesehatan_' . $currentDateTime . '.xlsx';
+        return Excel::download(new KondisiKesehatanExport, $fileName);
     }
 
     /**

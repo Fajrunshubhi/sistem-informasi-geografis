@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemantauanExport;
 use App\Models\KondisiKesehatan;
 use App\Models\Pemantauan;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPemantauanController extends Controller
 {
@@ -21,6 +23,14 @@ class AdminPemantauanController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pemantauan' => Pemantauan::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Pemantauan_' . $currentDateTime . '.xlsx';
+        return Excel::download(new PemantauanExport, $fileName);
     }
 
     /**

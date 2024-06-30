@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminProfilKecamatanController;
 use App\Http\Controllers\AdminPusatKesehatanController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Pasien;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,5 +51,32 @@ Route::resource('/admin/profil-kecamatan', AdminProfilKecamatanController::class
 Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware(['auth', 'is_SuperAdmin']);
 Route::delete('/admin/user/{user}', [AdminUserController::class, 'destroy'])->middleware(['auth'])->name('user.destroy.bysuperadmin');
 
+
+// EXPORT
+Route::get('users-export', [AdminUserController::class, 'export'])->name('users.export');
+
+Route::get('pusat-kesehatan-export', [AdminPusatKesehatanController::class, 'export'])->name('pusat.kesehatan.export');
+
+Route::get('fasilitas-kesehatan-export', [AdminFasilitasKesehatanController::class, 'export'])->name('fasilitas.kesehatan.export');
+
+Route::get('layanan-kesehatan-export', [AdminLayananKesehatanController::class, 'export'])->name('layanan.kesehatan.export');
+
+Route::get('kondisi-kesehatan-export', [AdminKondisiKesehatanController::class, 'export'])->name('kondisi.kesehatan.export');
+
+Route::get('kategori-fasilitas-export', [AdminKategoriFasilitasController::class, 'export'])->name('kategori.fasilitas.export');
+
+Route::get('pasien-export', [AdminPasienController::class, 'export'])->name('pasien.export');
+
+Route::get('penyakit-export', [AdminPenyakitController::class, 'export'])->name('penyakit.export');
+
+Route::get('pemantauan-export', [AdminPemantauanController::class, 'export'])->name('pemantauan.export');
+
+Route::get('laporan-kesehatan-export', [AdminLaporanKesehatanController::class, 'export'])->name('laporan.kesehatan.export');
+
+Route::get('desa-export', [AdminDesaController::class, 'export'])->name('desa.export');
+
+Route::get('berita-informasi-export', [AdminBeritaInformasiController::class, 'export'])->name('berita.informasi.export');
+
+Route::get('profil-kecamatan-export', [AdminProfilKecamatanController::class, 'export'])->name('profil.kecamatan.export');
 
 require __DIR__ . '/auth.php';

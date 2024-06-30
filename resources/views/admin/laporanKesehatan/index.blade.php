@@ -17,7 +17,7 @@
             <h5 class="card-header d-inline">Tabel Data Laporan Kesehatan</h5>
             <div class="my-3 me-4 list-btn-data">
                 <a href="/admin/laporan-kesehatan/create" class="btn btn-primary btn-tambah-data">Tambah Data</a>
-                <button type="button" class="btn btn-success ms-1">Export</button>
+                <a href="{{ route('laporan.kesehatan.export') }}" class="btn btn-success ms-1 text-white">Export</a>
             </div>
         </div>
         <div class="table-responsive px-2">
@@ -40,7 +40,7 @@
                             substr($data->deskripsi,0,75)."..."
                             : $data->deskripsi)
                             }}</td>
-                        <td>{{ $data->file }}</td>
+                        <td><a href="{{ asset('storage/' . $data->file) }}" target="_blank">{{ $data->file }}</a></td>
                         <td class="align-middle">
                             @can('is_adminDesa', $data->desa)
                             <div class="container-aksi align-items-center">

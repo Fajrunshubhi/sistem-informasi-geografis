@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BeritaExport;
 use App\Models\BeritaInformasi;
 use App\Models\ProfilKecamatan;
 use App\Models\User;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminBeritaInformasiController extends Controller
 {
@@ -22,6 +24,14 @@ class AdminBeritaInformasiController extends Controller
             'berita_informasi' => BeritaInformasi::latest()->get(),
             'profil_kecamatan' => ProfilKecamatan::all()->find(1)
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Berita_Informasi_' . $currentDateTime . '.xlsx';
+        return Excel::download(new BeritaExport, $fileName);
     }
 
     /**

@@ -17,7 +17,7 @@
             <h5 class="card-header d-inline">Tabel Data Kategori Fasilitas</h5>
             <div class="my-3 me-4 list-btn-data">
                 <a href="/admin/data/kategori-fasilitas/create" class="btn btn-primary btn-tambah-data">Tambah Data</a>
-                <button type="button" class="btn btn-success ms-1">Export</button>
+                <a href="{{ route('kategori.fasilitas.export') }}" class="btn btn-success ms-1 text-white">Export</a>
             </div>
         </div>
         <div class="table-responsive px-2">

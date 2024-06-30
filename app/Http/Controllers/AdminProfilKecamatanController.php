@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProfilKecamatanExport;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminProfilKecamatanController extends Controller
 {
@@ -17,6 +19,14 @@ class AdminProfilKecamatanController extends Controller
             'title' => 'Profil Kecamatan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Profil_Kecamatan_' . $currentDateTime . '.xlsx';
+        return Excel::download(new ProfilKecamatanExport, $fileName);
     }
 
     /**

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KategoriFasilitasExport;
 use App\Models\KategoriFasilitas;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminKategoriFasilitasController extends Controller
 {
@@ -19,6 +21,14 @@ class AdminKategoriFasilitasController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kategoriFasilitas' => KategoriFasilitas::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Kategori_Fasilitas_' . $currentDateTime . '.xlsx';
+        return Excel::download(new KategoriFasilitasExport, $fileName);
     }
 
     /**

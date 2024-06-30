@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanKesehatanExport;
 use App\Models\Desa;
 use App\Models\LaporanKesehatan;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminLaporanKesehatanController extends Controller
 {
@@ -21,6 +23,14 @@ class AdminLaporanKesehatanController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'laporan_kesehatan' => LaporanKesehatan::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Laporan_Kesehatan_' . $currentDateTime . '.xlsx';
+        return Excel::download(new LaporanKesehatanExport, $fileName);
     }
 
     /**

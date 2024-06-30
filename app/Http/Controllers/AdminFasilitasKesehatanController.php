@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FasilitasKesehatanExport;
 use App\Models\Desa;
 use App\Models\FasilitasKesehatan;
 use App\Models\KategoriFasilitas;
@@ -9,6 +10,7 @@ use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminFasilitasKesehatanController extends Controller
 {
@@ -22,6 +24,14 @@ class AdminFasilitasKesehatanController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'fasilitas_kesehatan' => FasilitasKesehatan::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Fasilitas_Kesehatan_' . $currentDateTime . '.xlsx';
+        return Excel::download(new FasilitasKesehatanExport(), $fileName);
     }
 
     /**

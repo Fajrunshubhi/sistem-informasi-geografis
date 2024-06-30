@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-between">
             <h5 class="card-header d-inline">Tabel Data Profil Kecamatan</h5>
             <div class="my-3 me-4 list-btn-data">
-                <button type="button" class="btn btn-success ms-1">Export</button>
+                <a href="{{ route('profil.kecamatan.export') }}" class="btn btn-success ms-1 text-white">Export</a>
             </div>
         </div>
         <div class="table-responsive px-2">

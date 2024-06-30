@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PasienExport;
 use App\Models\Desa;
 use App\Models\Pasien;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPasienController extends Controller
 {
@@ -20,6 +22,14 @@ class AdminPasienController extends Controller
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'pasien' => Pasien::latest()->get()
         ]);
+    }
+
+    public function export()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = 'Pasien_' . $currentDateTime . '.xlsx';
+        return Excel::download(new PasienExport, $fileName);
     }
 
     /**
