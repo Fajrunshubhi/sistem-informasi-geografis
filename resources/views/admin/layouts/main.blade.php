@@ -19,7 +19,8 @@
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
-    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/vendor/vendor.js', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/vendor/vendor.js', 'resources/js/app.js',
+    'resources/css/main.css'])
 
     {{-- LEAFLET --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"

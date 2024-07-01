@@ -1,0 +1,179 @@
+.card-dashboard-1 {
+    border-bottom: 5px solid #696cff !important;
+}
+.card-dashboard-1:hover {
+    border-right: 1px solid #696cff;
+    border-left: 1px solid #696cff;
+    box-shadow: 1px 1px 5px #696cff;
+}
+.bg-dashboard-pusatkesehatan1 {
+    background-color: #696cff !important;
+}
+.tx-dashboard-pusatkesehatan1 {
+    color: #696cff !important;
+}
+.bg-dashboard-pusatkesehatan2 {
+    background-color: #d4d4ff !important;
+}
+
+.card-dashboard-2 {
+    border-bottom: 5px solid #ffcd6a !important;
+}
+.card-dashboard-2:hover {
+    border-right: 1px solid #ffcd6a;
+    border-left: 1px solid #ffcd6a;
+    box-shadow: 1px 1px 5px #ffcd6a;
+}
+.bg-dashboard-fasilitaskesehatan1 {
+    background-color: #ffcd6a !important;
+}
+.tx-dashboard-fasilitaskesehatan1 {
+    color: #ffcd6a !important;
+}
+.bg-dashboard-fasilitaskesehatan2 {
+    background-color: #fff2d6 !important;
+}
+
+.card-dashboard-3 {
+    border-bottom: 5px solid #ff9d8c !important;
+}
+.card-dashboard-3:hover {
+    border-right: 1px solid #ff9d8c;
+    border-left: 1px solid #ff9d8c;
+    box-shadow: 1px 1px 5px #ff9d8c;
+}
+.bg-dashboard-layanankesehatan1 {
+    background-color: #ff9d8c !important;
+}
+.tx-dashboard-layanankesehatan1 {
+    color: #ff9d8c !important;
+}
+.bg-dashboard-layanankesehatan2 {
+    background-color: #ffe0db !important;
+}
+
+.card-dashboard-4 {
+    border-bottom: 5px solid #03c3ec !important;
+}
+.card-dashboard-4:hover {
+    border-right: 1px solid #03c3ec;
+    border-left: 1px solid #03c3ec;
+    box-shadow: 1px 1px 5px #03c3ec;
+}
+.bg-dashboard-kondisikesehatan1 {
+    background-color: #03c3ec !important;
+}
+.tx-dashboard-kondisikesehatan1 {
+    color: #03c3ec !important;
+}
+.bg-dashboard-kondisikesehatan2 {
+    background-color: #adf0ff !important;
+}
+
+.card-dashboard-5 {
+    border-bottom: 5px solid #ad6cff !important;
+}
+.card-dashboard-5:hover {
+    border-right: 1px solid #ad6cff;
+    border-left: 1px solid #ad6cff;
+    box-shadow: 1px 1px 5px #ad6cff;
+}
+.bg-dashboard-pasien1 {
+    background-color: #ad6cff !important;
+}
+.tx-dashboard-pasien1 {
+    color: #ad6cff !important;
+}
+.bg-dashboard-pasien2 {
+    background-color: #dbc0ff !important;
+}
+
+.card-dashboard-6 {
+    border-bottom: 5px solid #1fff32 !important;
+}
+.card-dashboard-6:hover {
+    border-right: 1px solid #1fff32;
+    border-left: 1px solid #1fff32;
+    box-shadow: 1px 1px 5px #1fff32;
+}
+.bg-dashboard-penyakit1 {
+    background-color: #1fff32 !important;
+}
+.tx-dashboard-penyakit1 {
+    color: #1fff32 !important;
+}
+.bg-dashboard-penyakit2 {
+    background-color: #d0fdd3 !important;
+}
+
+.card-dashboard-7 {
+    border-bottom: 5px solid #ee2eff !important;
+}
+.card-dashboard-7:hover {
+    border-right: 1px solid #ee2eff;
+    border-left: 1px solid #ee2eff;
+    box-shadow: 1px 1px 5px #ee2eff;
+}
+.bg-dashboard-pemantauan1 {
+    background-color: #ee2eff !important;
+}
+.tx-dashboard-pemantauan1 {
+    color: #ee2eff !important;
+}
+.bg-dashboard-pemantauan2 {
+    background-color: #fabeff !important;
+}
+
+.card-dashboard-8 {
+    border-bottom: 5px solid #3411ff !important;
+}
+.card-dashboard-8:hover {
+    border-right: 1px solid #3411ff;
+    border-left: 1px solid #3411ff;
+    box-shadow: 1px 1px 5px #3411ff;
+}
+.bg-dashboard-laporankesehatan1 {
+    background-color: #3411ff !important;
+}
+.tx-dashboard-laporankesehatan1 {
+    color: #3411ff !important;
+}
+.bg-dashboard-laporankesehatan2 {
+    background-color: #bfb4fc !important;
+}
+
+.card-dashboard-9 {
+    border-bottom: 5px solid #ff3b55 !important;
+}
+.card-dashboard-9:hover {
+    border-right: 1px solid #ff3b55;
+    border-left: 1px solid #ff3b55;
+    box-shadow: 1px 1px 5px #ff3b55;
+}
+.bg-dashboard-berita1 {
+    background-color: #ff3b55 !important;
+}
+.tx-dashboard-berita1 {
+    color: #ff3b55 !important;
+}
+.bg-dashboard-berita2 {
+    background-color: #ffbbc4 !important;
+}
+
+.card-dashboard-10 {
+    border-bottom: 5px solid #ff6b30 !important;
+}
+.card-dashboard-10:hover {
+    border-right: 1px solid #ff6b30;
+    border-left: 1px solid #ff6b30;
+    box-shadow: 1px 1px 5px #ff6b30;
+}
+.bg-dashboard-user1 {
+    background-color: #ff6b30 !important;
+}
+.tx-dashboard-user1 {
+    color: #ff6b30 !important;
+}
+.bg-dashboard-user2 {
+    background-color: #facab7 !important;
+}

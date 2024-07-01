@@ -1,7 +1,9 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand justify-content-center">
         <a href="#" class="app-brand-link text-center pt-3">
-            <h3>Kecamatan {{ $profil_kecamatan->nama }}</h3>
+            <h3>Kecamatan @if ($profil_kecamatan->nama)
+                {{ $profil_kecamatan->nama }}
+                @endif</h3>
         </a>
         <a href="javascript:void(0);"
             class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none py-2 px-2">
