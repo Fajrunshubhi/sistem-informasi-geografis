@@ -8,7 +8,6 @@ use App\Models\Pemantauan;
 use App\Models\ProfilKecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPemantauanController extends Controller
@@ -21,7 +20,11 @@ class AdminPemantauanController extends Controller
         return response()->view('admin.pemantauan.index', [
             'title' => 'Pemantauan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'pemantauan' => Pemantauan::latest()->get()
+            'pemantauan' => Pemantauan::whereHas('kondisi_kesehatan', function ($query) {
+                $query->whereHas('pasien', function ($query) {
+                    $query->where('desa_id', Auth()->user()->desa_id);
+                });
+            })->latest()->get()
         ]);
     }
 

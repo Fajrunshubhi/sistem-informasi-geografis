@@ -21,7 +21,7 @@ class AdminLayananKesehatanController extends Controller
         return response()->view('admin.layananKesehatan.index', [
             'title' => 'Layanan Kesehatan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'layanan_kesehatan' => LayananKesehatan::latest()->get()
+            'layanan_kesehatan' => LayananKesehatan::where('desa_id', Auth()->user()->desa_id)->latest()->get()
         ]);
     }
 

@@ -22,7 +22,7 @@ class AdminPusatKesehatanController extends Controller
         return response()->view('admin.pusatKesehatan.index', [
             "title" => "Pusat Kesehatan",
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            "pusat_kesehatan" => PusatKesehatan::latest()->get()
+            "pusat_kesehatan" => PusatKesehatan::where('desa_id', Auth()->user()->desa_id)->latest()->get()
         ]);
     }
 

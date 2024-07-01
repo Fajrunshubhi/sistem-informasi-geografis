@@ -21,8 +21,10 @@ class AdminBeritaInformasiController extends Controller
     {
         return response()->view('admin.beritaInformasi.index', [
             'title' => 'Berita dan Informasi',
-            'berita_informasi' => BeritaInformasi::latest()->get(),
-            'profil_kecamatan' => ProfilKecamatan::all()->find(1)
+            'profil_kecamatan' => ProfilKecamatan::all()->find(1),
+            'berita_informasi' => BeritaInformasi::whereHas('user', function ($query) {
+                $query->where('desa_id', Auth()->user()->desa_id);
+            })->latest()->get(),
         ]);
     }
 

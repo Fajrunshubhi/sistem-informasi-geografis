@@ -21,7 +21,7 @@ class AdminUserController extends Controller
         return response()->view('admin.user.index', [
             'title' => 'Users',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'users' => User::all()
+            'users' => User::where('desa_id', Auth()->user()->desa_id)->latest()->get()
         ]);
     }
     public function export()

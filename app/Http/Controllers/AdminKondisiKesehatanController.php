@@ -21,7 +21,9 @@ class AdminKondisiKesehatanController extends Controller
         return response()->view('admin.kondisiKesehatan.index', [
             'title' => 'Kondisi Kesehatan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'kondisi_kesehatan' => KondisiKesehatan::latest()->get()
+            'kondisi_kesehatan' => KondisiKesehatan::whereHas('pasien', function ($query) {
+                $query->where('desa_id', Auth()->user()->desa_id);
+            })->latest()->get()
         ]);
     }
 

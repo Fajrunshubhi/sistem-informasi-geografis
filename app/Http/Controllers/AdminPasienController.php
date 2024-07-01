@@ -20,7 +20,7 @@ class AdminPasienController extends Controller
         return response()->view('admin.pasien.index', [
             'title' => 'Pasien',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'pasien' => Pasien::latest()->get()
+            'pasien' => Pasien::where('desa_id', Auth()->user()->desa_id)->latest()->get()
         ]);
     }
 
