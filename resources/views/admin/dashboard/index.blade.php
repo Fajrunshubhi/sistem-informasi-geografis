@@ -209,11 +209,53 @@
             </div>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="col-4">
+            <div style="width: 100%;">
+                <canvas id="pusat-kesehatan"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('pusat-kesehatan');
 
+        // Memproses data dari PHP ke format yang dibutuhkan oleh Chart.js
+        var chartData = {
+            labels: {!! $dataChart->map(function($item) {
+                    return \Carbon\Carbon::createFromDate($item->year, $item->month)->format('M Y');
+                }) !!},
+            datasets: [{
+                label: 'Number of Health Centers',
+                data: {!! $dataChart->pluck('count') !!},
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false
+            }]
+        };
 
+        var chartPusatKesehatan = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        precision: 0,
+                        suggestedMax: {!! $dataChart->max('count') + 1 !!}
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    });
 </script>
 @endsection

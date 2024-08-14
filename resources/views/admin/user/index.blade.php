@@ -24,6 +24,7 @@
             <table id="myTable" class="table table-hover align-middle table-responsive" style="width:100%">
                 <thead class="bg-primary">
                     <tr>
+                        <th class="text-white"></th>
                         <th class="text-white">No</th>
                         <th class="text-white">Desa</th>
                         <th class="text-white">Nama</th>
@@ -36,6 +37,13 @@
                     @foreach ($users as $data)
 
                     <tr>
+                        <td>
+                            <!-- View Icon with data-toggle and data-target attributes to trigger the modal -->
+                            <a href="#" class="text-primary" data-bs-toggle="modal"
+                                data-bs-target="#viewModal{{ $data->id }}">
+                                <i class="bi bi-eye-fill fs-4"></i>
+                            </a>
+                        </td>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->desa->nama_desa }}</td>
                         <td>{{ $data->nama }}</td>
@@ -58,10 +66,50 @@
                         </td>
                     </tr>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="viewModal{{ $data->id }}" tabindex="-1"
+                        aria-labelledby="viewModalLabel{{ $data->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="viewModalLabel{{ $data->id }}">Detail Pengguna</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row mb-2">
+                                            <div class="col-6"><strong>Desa</strong></div>
+                                            <div class="col-6">: {{ $data->desa->nama_desa }}</div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6"><strong>Nama</strong></div>
+                                            <div class="col-6">: {{ $data->nama }}</div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6"><strong>Email</strong></div>
+                                            <div class="col-6">: {{ $data->email }}</div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6"><strong>Role</strong></div>
+                                            <div class="col-6">: {{ $data->role }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     @endforeach
                 </tbody>
                 <tfoot class="bg-primary">
                     <tr>
+                        <th class="text-white"></th>
                         <th class="text-white">No</th>
                         <th class="text-white">Desa</th>
                         <th class="text-white">Nama</th>
@@ -81,6 +129,7 @@
         $('#myTable').DataTable({
             scrollX: true,
             columns: [ 
+                null,
                 { "width": "5%" }, 
                 null, 
                 null, 

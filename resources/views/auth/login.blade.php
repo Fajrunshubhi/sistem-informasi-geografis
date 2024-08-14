@@ -7,7 +7,11 @@
                 <div class="card-body">
                     <div class="app-brand justify-content-center h2 mb-3">
                         <a href="#" class="app-brand-link gap-2">
-                            <span class="app-brand-text text-body fw-bolder">Kecamatan Ngombol</span>
+                            <span class="app-brand-text text-body fw-bolder">Kecamatan @if ($profil_kecamatan->nama)
+                                {{ $profil_kecamatan->nama }}
+                                @else
+                                -
+                                @endif</span>
                         </a>
                     </div>
                     <hr>

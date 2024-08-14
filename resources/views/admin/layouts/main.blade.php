@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="layout-menu-fixed">
 
 <head>
     <meta charset="utf-8" />
@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/vendor/vendor.js', 'resources/js/app.js',
     'resources/css/main.css'])
+
+    {{-- CHART JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- LEAFLET --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"

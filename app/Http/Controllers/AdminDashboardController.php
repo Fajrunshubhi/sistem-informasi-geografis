@@ -25,7 +25,13 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): Response
     {
-        $totalPusatKesehatan = PusatKesehatan::count();
+        // Mengambil data per tahun per bulan
+        $dataChart = PusatKesehatan::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'ASC')
+            ->orderBy('month', 'ASC')
+            ->get();
+
         return response()->view('admin.dashboard.index', [
             'title' => 'Dashboard',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
@@ -47,6 +53,7 @@ class AdminDashboardController extends Controller
                 $query->where('desa_id', Auth()->user()->desa_id);
             })->count(),
             'totalUser' => User::where('desa_id', Auth()->user()->desa_id)->count(),
+            'dataChart' => $dataChart
         ]);
     }
 }
