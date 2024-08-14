@@ -8,8 +8,12 @@
                 @endif
             </h3>
         </a>
-        <a href="javascript:void(0);"
-            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none py-2 px-2">
+        <a href="javascript:void(0);" onclick="closeNavMini()"
+            class="layout-menu-toggle menu-link text-large ms-auto d-xl-none d-block py-2 px-2">
+            <i class="bi bi-arrow-left align-middle"></i>
+        </a>
+        <a href="javascript:void(0);" class="closebtn layout-menu-toggle-fscreen menu-link text-large ms-auto py-2 px-2"
+            onclick="closeNav()">
             <i class="bi bi-arrow-left align-middle"></i>
         </a>
     </div>

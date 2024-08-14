@@ -40,7 +40,7 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('admin.partials.sidebar')
-            <div class="layout-page">
+            <div class="layout-page" id="layout-page">
                 @include('admin.partials.navbar')
                 <div class="content-wrapper">
                     @yield('main-container')
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <div id="layout-overlay" class="layout-overlay layout-menu-toggle"></div>
     </div>
     @vite(['resources/js/app.js'])
 
@@ -58,8 +58,31 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @stack('js')
+    <script>
+        function openNav() {
+            document.getElementById("layout-menu").style.width = "250px";
+            document.getElementById("layout-menu").style.display = "block";
+            document.getElementById("layout-page").style.width = "100%";
+            document.getElementById("layout-page").style.paddingLeft = "260px";
 
-
+        }
+        function openNavMini() {
+            document.getElementById("layout-menu").style.width = "250px";
+            document.getElementById("layout-menu").style.display = "block";
+            document.getElementById("layout-page").style.width = "100%";
+        }
+        function closeNavMini() {
+            document.getElementById("layout-menu").style.width = "0";
+            document.getElementById("layout-menu").style.display = "none";
+            document.getElementById("layout-page").style.width = "100%";
+        }
+        function closeNav() {
+            document.getElementById("layout-menu").style.width = "0";
+            document.getElementById("layout-menu").style.display = "none";
+            document.getElementById("layout-page").style.width = "100%";
+            document.getElementById("layout-page").style.paddingLeft = "0";
+        }
+    </script>
 </body>
 
 </html>

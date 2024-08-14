@@ -1,7 +1,13 @@
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none" id="layout-menu-toggle">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center d-xl-none me-3 me-xl-0 " id="layout-menu-toggle">
+        <button class="nav-item nav-link px-0 me-xl-4" onclick="openNavMini()" href="javascript:void(0)">
+            <i class="bi bi-menu-button-wide"></i>
+        </button>
+    </div>
+    <div class="layout-menu-toggle-fscreen navbar-nav align-items-xl-center me-3 me-xl-0 "
+        id="layout-menu-toggle-fscreen">
+        <a class="opentbn nav-item nav-link px-0 me-xl-4" onclick="openNav()" href="javascript:void(0)">
             <i class="bi bi-menu-button-wide"></i>
         </a>
     </div>
