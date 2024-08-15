@@ -213,6 +213,16 @@
         zoom: 15,
         layers: [osm]
     });
+    L.control.locate({
+        locateOptions: {
+            maxZoom: 19,
+            enableHighAccuracy: true
+        },
+        strings: {
+            title: "Anda di sini!"
+        }
+        })
+        .addTo(map);
     
     let marker = L.marker([-7.824893908172728, 109.96604338891359], {
         draggable: true,

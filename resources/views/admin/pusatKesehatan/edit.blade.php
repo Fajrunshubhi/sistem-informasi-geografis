@@ -212,10 +212,20 @@
     let desa = L.layerGroup();
 
     let map = L.map('map', {
-        center: [-7.824893908172728, 109.96604338891359],
+        center: [document.getElementById('latitude').value, document.getElementById('longitude').value],
         zoom: 15,
         layers: [osm]
     });
+    L.control.locate({
+        locateOptions: {
+            maxZoom: 19,
+            enableHighAccuracy: true
+        },
+        strings: {
+            title: "Anda di sini!"
+        }
+        })
+        .addTo(map);
     
     let marker = L.marker([document.getElementById('latitude').value, document.getElementById('longitude').value], {
         draggable: true,

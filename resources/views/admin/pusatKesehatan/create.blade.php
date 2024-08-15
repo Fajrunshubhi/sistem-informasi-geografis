@@ -190,6 +190,30 @@
     });
     
 
+    // Akses lokasi pengguna manual
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+    //         var lat = position.coords.latitude;
+    //         var lon = position.coords.longitude;
+    //         var accuracy = position.coords.accuracy;
+
+    //         // Atur tampilan peta ke lokasi pengguna
+    //         map.setView([lat, lon], 13);
+
+    //         // Tambahkan marker ke lokasi pengguna
+    //         L.marker([lat, lon]).addTo(map)
+    //             .bindPopup("Anda di sini!")
+    //             .openPopup();
+    //         L.circle([lat, lon], {radius: accuracy}).addTo(map);
+            
+            
+    //     }, function() {
+    //         alert("Geolocation is not supported by this browser.");
+    //     });
+    // } else {
+    //     alert("Geolocation is not supported by this browser.");
+    // }
+    
     let desa = L.layerGroup();
 
     let map = L.map('map', {
@@ -197,8 +221,19 @@
         zoom: 15,
         layers: [osm]
     });
+    L.control.locate({
+        locateOptions: {
+            maxZoom: 19,
+            enableHighAccuracy: true
+        },
+        strings: {
+            title: "Anda di sini!"
+        }
+        })
+        .addTo(map);
     
-    let marker = L.marker([-7.824893908172728, 109.96604338891359], {
+    
+        let marker = L.marker([-7.824893908172728, 109.96604338891359], {
         draggable: true,
         clickable: true
     }).addTo(map);
@@ -214,16 +249,16 @@
         document.getElementById('latitude').value = e.latlng.lat;
         document.getElementById('longitude').value = e.latlng.lng;
     });
-        let overLayer = {
-            "desa" : desa
-        };
-        let baseMaps = {
-            "OpenStreetMap": osm,
-            "OpenStreetMap.HOT": osmHOT,
-            "MapTilerSatelit": mapTilerSatelit,
-            "MapTilerStreet": mapTilerStreet
-        };
-        L.control.layers(baseMaps, overLayer).addTo(map);
+    let overLayer = {
+        "desa" : desa
+    };
+    let baseMaps = {
+        "OpenStreetMap": osm,
+        "OpenStreetMap.HOT": osmHOT,
+        "MapTilerSatelit": mapTilerSatelit,
+        "MapTilerStreet": mapTilerStreet
+    };
+    L.control.layers(baseMaps, overLayer).addTo(map);
 
 </script>
 @endpush

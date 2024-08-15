@@ -167,10 +167,21 @@
         layers: [osm]
     });
     
+    
     let marker = L.marker([-7.824893908172728, 109.96604338891359], {
         draggable: true,
         clickable: true
     }).addTo(map);
+    L.control.locate({
+        locateOptions: {
+            maxZoom: 19,
+            enableHighAccuracy: true
+        },
+        strings: {
+            title: "Anda di sini!"
+        }
+        })
+        .addTo(map);
 
     marker.on('dragend', function (e) {
         let position = marker.getLatLng();
