@@ -14,14 +14,33 @@ use App\Http\Controllers\AdminPenyakitController;
 use App\Http\Controllers\AdminProfilKecamatanController;
 use App\Http\Controllers\AdminPusatKesehatanController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\BeritaInformasiController;
+use App\Http\Controllers\FasilitasKesehatanController;
+use App\Http\Controllers\KondisiKesehatanController;
+use App\Http\Controllers\KontakController;
+use App\Http\Controllers\LaporanKesehatanController;
+use App\Http\Controllers\LayananKesehatanController;
+use App\Http\Controllers\PemantauanController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Pasien;
+use App\Http\Controllers\ProfilKecamatanController;
+use App\Http\Controllers\PusatKesehatanController;
 use Illuminate\Support\Facades\Route;
 
+// HOME
+Route::get('/', [BerandaController::class, 'index']);
+Route::redirect('sebaran', '/sebaran/pusat-kesehatan');
+Route::get('/sebaran/pusat-kesehatan', [PusatKesehatanController::class, 'index']);
+Route::get('/sebaran/fasilitas-kesehatan', [FasilitasKesehatanController::class, 'index']);
+Route::get('/sebaran/layanan-kesehatan', [LayananKesehatanController::class, 'index']);
+Route::get('/sebaran/kondisi-kesehatan', [KondisiKesehatanController::class, 'index']);
+Route::get('/pemantauan-penyakit', [PemantauanController::class, 'index']);
+Route::get('/laporan-kesehatan', [LaporanKesehatanController::class, 'index']);
+Route::get('/berita-informasi', [BeritaInformasiController::class, 'index']);
+Route::get('/profil-kecamatan', [ProfilKecamatanController::class, 'index']);
+Route::get('/kontak', [KontakController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::redirect('admin', '/admin/dashboard');
 Route::redirect('dashboard', '/admin/dashboard');
