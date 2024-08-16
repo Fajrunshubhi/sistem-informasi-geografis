@@ -43,7 +43,7 @@ class AdminKondisiKesehatanController extends Controller
         return response()->view('admin.kondisiKesehatan.create', [
             'title' => 'Kondisi Kesehatan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
-            'pasien' => Pasien::all(),
+            'pasien' => Pasien::where('desa_id', Auth()->user()->desa_id)->latest()->get(),
             'penyakit' => Penyakit::all()
         ]);
     }
@@ -91,7 +91,7 @@ class AdminKondisiKesehatanController extends Controller
             'title' => 'Kondisi Kesehatan',
             'profil_kecamatan' => ProfilKecamatan::all()->find(1),
             'kondisi_kesehatan' => $kondisi_kesehatan,
-            'pasien' => Pasien::all(),
+            'pasien' => Pasien::where('desa_id', Auth()->user()->desa_id)->latest()->get(),
             'penyakit' => Penyakit::all()
         ]);
     }
