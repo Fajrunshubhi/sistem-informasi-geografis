@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body py-3 rounded">
     <div class="container-fluid">
-        <a class="navbar-brand fs-5" href="/">SIG | Kecamatan @if ($profil_kecamatan->nama)
+        <a class="navbar-brand fs-5 color-font-primary" href="/">SIG | Kecamatan @if ($profil_kecamatan->nama)
             {{ $profil_kecamatan->nama }}
             @else
             -

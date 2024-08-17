@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
-    @vite(['resources/sass/app.scss', 'resources/vendor/vendor.js', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss','resources/css/home.css', 'resources/vendor/vendor.js', 'resources/js/app.js'])
 
     {{-- LEAFLET --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -31,6 +31,7 @@
             <div class="content-wrapper">
                 @yield('main-container')
             </div>
+            @include('partials.footer')
         </div>
     </div>
     @vite(['resources/js/app.js'])
