@@ -63,12 +63,12 @@
                                 <a href="/admin/berita-informasi/{{ $data->id }}/edit"
                                     class="badge bg-warning d-block mb-2"><i
                                         class="bi bi-pencil-square me-1"></i>Edit</a>
-                                <form action="/admin/berita-informasi/{{ $data->id }}" method="POST">
+                                <form id="delete-form-{{ $data->id }}" action="/admin/berita-informasi/{{ $data->id }}"
+                                    method="POST">
                                     @method('delete')
                                     @csrf
-                                    <button class="badge bg-danger border-0 w-100"
-                                        onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i
-                                            class="bi bi-trash me-1"></i>Hapus
+                                    <button type="button" class="badge bg-danger border-0 w-100"
+                                        onclick="confirmDelete('{{ $data->id }}')"><i class="bi bi-trash"></i> Hapus
                                     </button>
                                 </form>
                             </div>
@@ -131,12 +131,13 @@
                                                     class="badge bg-warning d-block me-2">
                                                     <i class="bi bi-pencil-square me-1"></i>Edit
                                                 </a>
-                                                <form action="/admin/berita-informasi/{{ $data->id }}" method="POST">
+                                                <form id="delete-form-{{ $data->id }}"
+                                                    action="/admin/berita-informasi/{{ $data->id }}" method="POST">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="badge bg-danger border-0 w-100"
-                                                        onclick="return confirm('Anda yakin ingin menghapus data ini?')">
-                                                        <i class="bi bi-trash"></i> Hapus
+                                                    <button type="button" class="badge bg-danger border-0 w-100"
+                                                        onclick="confirmDelete('{{ $data->id }}')"><i
+                                                            class="bi bi-trash"></i> Hapus
                                                     </button>
                                                 </form>
                                             </div>

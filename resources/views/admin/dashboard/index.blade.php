@@ -9,14 +9,14 @@
                 <div class="card-body py-2">
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar me-2">
-                            <span class="avatar-initial rounded bg-dashboard-pusatkesehatan2"><i
-                                    class="bi bi-journal-medical  menu-icon tf-icons tx-dashboard-pusatkesehatan1 mx-auto"></i></span>
+                            <span class="avatar-initial rounded bg-dashboard"><i
+                                    class="bi bi-journal-medical  menu-icon tf-icons mx-auto"></i></span>
                         </div>
                         <h4 class="ms-1 mb-0">{{ $totalPusatKesehatan }}</h4>
                     </div>
                     <h5 class="mb-3">Pusat Kesehatan</h5>
                     <a href="/admin/data/pusat-kesehatan">
-                        <p class="mb-0 text-center bg-dashboard-pusatkesehatan1 py-1 rounded-md">
+                        <p class="mb-0 text-center bg-dashboard py-1 rounded-md">
                             <span class="fw-medium me-1 text-white">Selengkapnya <i
                                     class="bi bi-arrow-right ms-2"></i></span>
                         </p>
@@ -25,18 +25,18 @@
             </div>
         </div>
         <div class="col-sm-6 col-lg-3 mb-4">
-            <div class="card card-dashboard-2 h-100">
+            <div class="card card-dashboard-1 h-100">
                 <div class="card-body py-2">
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar me-2">
-                            <span class="avatar-initial rounded bg-dashboard-fasilitaskesehatan2"><i
-                                    class="bi bi-journal-medical  menu-icon tf-icons tx-dashboard-fasilitaskesehatan1 mx-auto"></i></span>
+                            <span class="avatar-initial rounded bg-dashboard"><i
+                                    class="bi bi-journal-medical  menu-icon tf-icons mx-auto"></i></span>
                         </div>
                         <h4 class="ms-1 mb-0">{{ $totalFasilitasKesehatan }}</h4>
                     </div>
                     <h5 class="mb-3">Fasilitas Kesehatan</h5>
                     <a href="/admin/data/fasilitas-kesehatan">
-                        <p class="mb-0 text-center bg-dashboard-fasilitaskesehatan1 py-1 rounded-md">
+                        <p class="mb-0 text-center bg-dashboard py-1 rounded-md">
                             <span class="fw-medium me-1 text-white">Selengkapnya <i
                                     class="bi bi-arrow-right ms-2"></i></span>
                         </p>
@@ -45,18 +45,18 @@
             </div>
         </div>
         <div class="col-sm-6 col-lg-3 mb-4">
-            <div class="card card-dashboard-3 h-100">
+            <div class="card card-dashboard-1 h-100">
                 <div class="card-body py-2">
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar me-2">
-                            <span class="avatar-initial rounded bg-dashboard-layanankesehatan2"><i
-                                    class="bi bi-journal-medical menu-icon tf-icons tx-dashboard-layanankesehatan1 mx-auto"></i></span>
+                            <span class="avatar-initial rounded bg-dashboard"><i
+                                    class="bi bi-journal-medical menu-icon tf-icons mx-auto"></i></span>
                         </div>
                         <h4 class="ms-1 mb-0">{{ $totalLayananKesehatan }}</h4>
                     </div>
                     <h5 class="mb-3">Layanan Kesehatan</h5>
                     <a href="/admin/data/layanan-kesehatan">
-                        <p class="mb-0 text-center bg-dashboard-layanankesehatan1 py-1 rounded-md">
+                        <p class="mb-0 text-center bg-dashboard py-1 rounded-md">
                             <span class="fw-medium me-1 text-white">Selengkapnya <i
                                     class="bi bi-arrow-right ms-2"></i></span>
                         </p>
@@ -65,18 +65,18 @@
             </div>
         </div>
         <div class="col-sm-6 col-lg-3 mb-4">
-            <div class="card card-dashboard-4 h-100">
+            <div class="card card-dashboard-1 h-100">
                 <div class="card-body py-2">
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar me-2">
-                            <span class="avatar-initial rounded bg-dashboard-kondisikesehatan2"><i
-                                    class="bi bi-journal-medical menu-icon tf-icons tx-dashboard-kondisikesehatan1 mx-auto"></i></span>
+                            <span class="avatar-initial rounded bg-dashboard"><i
+                                    class="bi bi-journal-medical menu-icon tf-icons mx-auto"></i></span>
                         </div>
                         <h4 class="ms-1 mb-0">{{ $totalKondisiKesehatan }}</h4>
                     </div>
                     <h5 class="mb-3">Kondisi Kesehatan</h5>
                     <a href="/admin/data/kondisi-kesehatan">
-                        <p class="mb-0 text-center bg-dashboard-kondisikesehatan1 py-1 rounded-md">
+                        <p class="mb-0 text-center bg-dashboard py-1 rounded-md">
                             <span class="fw-medium me-1 text-white">Selengkapnya <i
                                     class="bi bi-arrow-right ms-2"></i></span>
                         </p>
@@ -92,7 +92,7 @@
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar me-2">
                             <span class="avatar-initial rounded bg-dashboard-pasien2"><i
-                                    class="bi bi-person-vcard menu-icon tf-icons tx-dashboard-pasien1 mx-auto"></i></span>
+                                    class="bi bi-person-vcard menu-icon tf-icons mx-auto"></i></span>
                         </div>
                         <h4 class="ms-1 mb-0">{{ $totalPasien }}</h4>
                     </div>

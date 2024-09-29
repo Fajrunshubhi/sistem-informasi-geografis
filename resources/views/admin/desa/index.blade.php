@@ -47,21 +47,11 @@
                                 <a href="/admin/desa/{{ $data->id }}/edit" class="badge bg-warning d-block mb-1"><i
                                         class="bi bi-pencil-square me-1"></i>
                                     Edit</a>
-                                <form action="/admin/desa/{{ $data->id }}" method="POST">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="badge bg-danger border-0 w-100"
-                                        onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i
-                                            class="bi bi-trash me-1"></i>
-                                        Hapus
-                                    </button>
-                                </form>
                             </div>
                             @endcan
                         </td>
                     </tr>
                     @endforeach
-
                 </tbody>
                 <tfoot class="bg-primary">
                     <tr>

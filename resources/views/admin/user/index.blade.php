@@ -51,17 +51,21 @@
                         <td>{{ $data->role }}</td>
                         <td>
                             @can('is_adminDesa', $data->desa)
+                            @cannot('is_userSuperAdmin', $data)
+                            @cannot('is_self', $data)
                             <div class="container-aksi align-items-center">
-                                <form action="{{ route('user.destroy.bysuperadmin', ['user' => $data->id]) }}"
+                                <form id="delete-form-{{ $data->id }}"
+                                    action="{{ route('user.destroy.bysuperadmin', ['user' => $data->id]) }}"
                                     method="POST">
                                     @method('delete')
                                     @csrf
-                                    <button class="badge bg-danger border-0 w-100"
-                                        onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i
-                                            class="bi bi-trash me-1"></i>Hapus
+                                    <button type="button" class="badge bg-danger border-0 w-100"
+                                        onclick="confirmDelete('{{ $data->id }}')"><i class="bi bi-trash"></i> Hapus
                                     </button>
                                 </form>
                             </div>
+                            @endcannot
+                            @endcannot
                             @endcan
                         </td>
                     </tr>

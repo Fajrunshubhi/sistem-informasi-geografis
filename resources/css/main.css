@@ -6,10 +6,10 @@
     border-left: 1px solid #696cff;
     box-shadow: 1px 1px 5px #696cff;
 }
-.bg-dashboard-pusatkesehatan1 {
+.bg-dashboard {
     background-color: #696cff !important;
 }
-.tx-dashboard-pusatkesehatan1 {
+.tx-dashboard {
     color: #696cff !important;
 }
 .bg-dashboard-pusatkesehatan2 {
@@ -125,21 +125,21 @@
 }
 
 .card-dashboard-8 {
-    border-bottom: 5px solid #3411ff !important;
+    border-bottom: 5px solid #ffcd6a !important;
 }
 .card-dashboard-8:hover {
-    border-right: 1px solid #3411ff;
-    border-left: 1px solid #3411ff;
-    box-shadow: 1px 1px 5px #3411ff;
+    border-right: 1px solid #ffcd6a;
+    border-left: 1px solid #ffcd6a;
+    box-shadow: 1px 1px 5px #ffcd6a;
 }
 .bg-dashboard-laporankesehatan1 {
-    background-color: #3411ff !important;
+    background-color: #ffcd6a !important;
 }
 .tx-dashboard-laporankesehatan1 {
-    color: #3411ff !important;
+    color: #ffcd6a !important;
 }
 .bg-dashboard-laporankesehatan2 {
-    background-color: #bfb4fc !important;
+    background-color: #fff2d6 !important;
 }
 
 .card-dashboard-9 {
@@ -180,4 +180,7 @@
 
 .color-font-primary {
     color: #696cff !important;
+}
+.swal2-container {
+    z-index: 9999 !important; /* Mengatur z-index tinggi agar modal SweetAlert selalu di atas */
 }
