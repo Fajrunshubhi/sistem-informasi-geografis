@@ -7,3 +7,6 @@
 .color-bg-primary {
     background-color: #696cff !important;
 }
+.deskripsi-container * {
+    text-align: justify !important;
+}

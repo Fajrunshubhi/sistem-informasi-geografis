@@ -77,8 +77,8 @@
             </div>
         </div>
     </div>
-    <div class="container mt-3">
-        <div class="deskripsi-container text-justify">
+    <div class="container mt-4 ">
+        <div class="container deskripsi-container">
             {!! $profil_kecamatan->deskripsi !!}
         </div>
     </div>

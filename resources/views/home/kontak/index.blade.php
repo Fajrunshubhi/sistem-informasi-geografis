@@ -3,7 +3,8 @@
 @section('main-container')
 <div class="container mt-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Pusat Kesehatan</h3>
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3 fw-bold">Pusat Kesehatan
+        </h3>
         <form action="/kontak" method="GET" class="d-inline-block">
             <input type="text" name="search-pusat-kesehatan" class="form-control" placeholder="Cari Pusat Kesehatan"
                 value="{{ request()->get('search-pusat-kesehatan') }}">
@@ -17,7 +18,7 @@
                 <img src="{{ asset('storage/'.$data->gambar) }}" class="card-img-top" height="200px"
                     alt="Gambar {{ $data->nama_pusat_kesehatan }}">
                 <div class="card-body">
-                    <h5 class="card-title color-font-primary">{{ $data->nama_pusat_kesehatan }}</h5>
+                    <h5 class="card-title color-font-primary fw-bold">{{ $data->nama_pusat_kesehatan }}</h5>
                     <p class="card-text">{{ $data->alamat }}</p>
                     <p class="card-text"><i class="bi bi-telephone-plus-fill me-2"></i>{{ $data->no_tlpn }}</p>
                     <p class="card-text color-font-primary">Desa {{ $data->desa->nama_desa }}</p>
@@ -31,7 +32,8 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Fasilitas Kesehatan
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3 fw-bold">Fasilitas
+            Kesehatan
         </h3>
         <form action="/kontak" method="GET" class="d-inline-block">
             <input type="text" name="search-fasilitas-kesehatan" class="form-control"
@@ -47,7 +49,7 @@
                 <img src="{{ asset('storage/'.$data->gambar) }}" class="card-img-top" height="200px"
                     alt="Gambar {{ $data->nama_fasilitas }}">
                 <div class="card-body">
-                    <h5 class="card-title color-font-primary">{{ $data->nama_fasilitas }}</h5>
+                    <h5 class="card-title color-font-primary fw-bold">{{ $data->nama_fasilitas }}</h5>
                     <p class="card-text color-font-primary">{{ $data->kategori->nama }}</p>
                     <p class="card-text">{{ $data->alamat }}</p>
                     <p class="card-text"><i class="bi bi-telephone-plus-fill me-2"></i>{{ $data->no_tlpn }}</p>
@@ -62,7 +64,8 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Layanan Kesehatan
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3 fw-bold">Layanan
+            Kesehatan
         </h3>
         <form action="/kontak" method="GET" class="d-inline-block">
             <input type="text" name="search-layanan-kesehatan" class="form-control" placeholder="Cari Layanan Kesehatan"
@@ -87,7 +90,7 @@
                 <img src="{{ asset('storage/'.$data->gambar) }}" class="card-img-top" height="200px"
                     alt="Gambar {{ $data->nama_layanan }}">
                 <div class="card-body">
-                    <h5 class="card-title color-font-primary">{{ $data->nama_layanan }}</h5>
+                    <h5 class="card-title color-font-primary fw-bold">{{ $data->nama_layanan }}</h5>
                     <p class="card-text">{{ $hari }}, {{ $tanggalFormatted }} {{ $bulan }} {{ $tahun }} <br> {{
                         $jam }} s/d
                         selesai</p>
