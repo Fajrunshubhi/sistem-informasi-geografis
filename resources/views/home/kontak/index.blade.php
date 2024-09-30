@@ -2,7 +2,14 @@
 
 @section('main-container')
 <div class="container mt-3">
-    <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Pusat Kesehatan</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Pusat Kesehatan</h3>
+        <form action="/kontak" method="GET" class="d-inline-block">
+            <input type="text" name="search-pusat-kesehatan" class="form-control" placeholder="Cari Pusat Kesehatan"
+                value="{{ request()->get('search-pusat-kesehatan') }}">
+        </form>
+    </div>
+    @if ($kontak_pusat_kesehatan->count())
     <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
         @foreach ($kontak_pusat_kesehatan as $data)
         <div class="col">
@@ -19,8 +26,20 @@
         </div>
         @endforeach
     </div>
-    <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3 mt-4">Fasilitas Kesehatan
-    </h3>
+    @else
+    <p class="text-center fs-4">Kontak Pusat Kesehatan Tidak Ditemukan!</p>
+    @endif
+
+    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Fasilitas Kesehatan
+        </h3>
+        <form action="/kontak" method="GET" class="d-inline-block">
+            <input type="text" name="search-fasilitas-kesehatan" class="form-control"
+                placeholder="Cari Fasilitas Kesehatan" value="{{ request()->get('search-fasilitas-kesehatan') }}">
+        </form>
+    </div>
+
+    @if ($kontak_fasilitas_kesehatan->count())
     <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
         @foreach ($kontak_fasilitas_kesehatan as $data)
         <div class="col">
@@ -38,8 +57,20 @@
         </div>
         @endforeach
     </div>
-    <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3 mt-4">Layanan Kesehatan
-    </h3>
+    @else
+    <p class="text-center fs-4">Kontak Fasilitas Kesehatan Tidak Ditemukan!</p>
+    @endif
+
+    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h3 class="color-font-primary d-inline-block mb-3 border-bottom border-primary border-3">Layanan Kesehatan
+        </h3>
+        <form action="/kontak" method="GET" class="d-inline-block">
+            <input type="text" name="search-layanan-kesehatan" class="form-control" placeholder="Cari Layanan Kesehatan"
+                value="{{ request()->get('search-layanan-kesehatan') }}">
+        </form>
+    </div>
+
+    @if ($kontak_layanan_kesehatan->count())
     <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
         @foreach ($kontak_layanan_kesehatan as $data)
         @php
@@ -68,5 +99,9 @@
         </div>
         @endforeach
     </div>
+    @else
+    <p class="text-center fs-4">Kontak Layanan Kesehatan Tidak Ditemukan!</p>
+    @endif
+
 </div>
 @endsection
