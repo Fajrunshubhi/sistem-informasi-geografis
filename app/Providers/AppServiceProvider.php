@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Desa;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -35,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('is_userSuperAdmin', function (User $user, User $cekUser) {
             return $cekUser->role != "Admin";
         });
+        Paginator::useBootstrapFive();
     }
 }

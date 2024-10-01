@@ -48,9 +48,9 @@
                         <td>{{ $data->user->nama }}</td>
                         <td>{{ $data->user->role }}</td>
                         <td>{{ $data->judul }}</td>
-                        <td>{{ (str_word_count($data->isi) > 10 ? substr($data->isi,0,75)."..."
+                        <td>{!! (str_word_count($data->isi) > 10 ? substr($data->isi,0,75)."..."
                             : $data->isi)
-                            }}</td>
+                            !!}</td>
                         <td class="p-0">
                             <div class="w-75" style="max-height: 350px; overflow: hidden;">
                                 <img src="{{ asset('storage/'.$data->gambar) }}" alt="{{ $data->judul }}"

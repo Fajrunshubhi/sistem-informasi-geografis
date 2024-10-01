@@ -37,6 +37,7 @@ Route::get('/sebaran/kondisi-kesehatan', [KondisiKesehatanController::class, 'in
 Route::get('/pemantauan-penyakit', [PemantauanController::class, 'index']);
 Route::get('/laporan-kesehatan', [LaporanKesehatanController::class, 'index']);
 Route::get('/berita-informasi', [BeritaInformasiController::class, 'index']);
+Route::get('/berita-informasi/{berita_informasi:slug}', [BeritaInformasiController::class, 'show']);
 Route::get('/profil-kecamatan', [ProfilKecamatanController::class, 'index']);
 Route::get('/kontak', [KontakController::class, 'index']);
 

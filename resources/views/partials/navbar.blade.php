@@ -39,7 +39,7 @@
                 <li class="nav-item ms-2 {{ Request::is('laporan-kesehatan') ? 'active fw-bold' : '' }}">
                     <a class="nav-link" href="/laporan-kesehatan">Laporan Kesehatan</a>
                 </li>
-                <li class="nav-item ms-2 {{ Request::is('berita-informasi') ? 'active fw-bold' : '' }}">
+                <li class="nav-item ms-2 {{ Request::is('berita-informasi*') ? 'active fw-bold' : '' }}">
                     <a class="nav-link" href="/berita-informasi">Berita dan Informasi</a>
                 </li>
                 <li class="nav-item ms-2 {{ Request::is('profil-kecamatan') ? 'active fw-bold' : '' }}">

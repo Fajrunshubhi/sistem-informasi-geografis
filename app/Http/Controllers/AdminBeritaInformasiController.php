@@ -11,6 +11,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
+
 
 class AdminBeritaInformasiController extends Controller
 {
@@ -63,6 +65,8 @@ class AdminBeritaInformasiController extends Controller
             $validatedData['gambar'] = $request->file('gambar')->store('berita-informasi-images');
         }
         $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['slug'] = Str::slug($request->judul, '-');
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->isi), 150);
 
         BeritaInformasi::create($validatedData);
         return redirect('/admin/berita-informasi')->with('success', 'Data Berita dan Informasi Kesehatan Berhasil Ditambah!');
