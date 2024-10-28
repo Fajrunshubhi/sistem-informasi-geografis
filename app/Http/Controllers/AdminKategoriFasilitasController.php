@@ -49,6 +49,7 @@ class AdminKategoriFasilitasController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => ['required'],
+            'warna' => ['required']
         ]);
         KategoriFasilitas::create($validatedData);
         return redirect('/admin/data/kategori-fasilitas')->with('success', 'Data Kategori Fasilitas Berhasil Ditambah!');
@@ -79,9 +80,14 @@ class AdminKategoriFasilitasController extends Controller
      */
     public function update(Request $request, KategoriFasilitas $kategori_fasilita)
     {
-        $validatedData = $request->validate([
+        $rules = [
             'nama' => ['required']
-        ]);
+        ];
+        if ($request->warna != $kategori_fasilita->warna) {
+            $rules['warna'] = ['required'];
+        };
+
+        $validatedData = $request->validate($rules);
         KategoriFasilitas::where('id', $kategori_fasilita->id)
             ->update($validatedData);
         return redirect('/admin/data/kategori-fasilitas')->with('success', 'Data Kategori Fasilitas Berhasil Diedit!');

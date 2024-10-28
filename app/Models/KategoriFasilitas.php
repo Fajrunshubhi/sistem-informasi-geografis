@@ -10,6 +10,7 @@ class KategoriFasilitas extends Model
     use HasFactory;
     protected $fillable = [
         'nama',
+        'warna'
     ];
     public function fasilitas_kesehatan()
     {

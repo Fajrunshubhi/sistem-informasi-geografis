@@ -25,6 +25,7 @@
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white">Nama Kategori Fasilitas</th>
+                        <th class="text-white">Warna</th>
                         <th class="text-white">Aksi</th>
                     </tr>
                 </thead>
@@ -32,6 +33,11 @@
                     @foreach ($kategoriFasilitas as $data)
                     <tr>
                         <td>{{ $data->nama }}</td>
+                        <td>
+                            <div class="kotak-warna rounded-lg"
+                                style="background-color: {{ $data->warna }}; width: 100%; height: 70px; border-radius: 10px">
+                            </div>
+                        </td>
                         <td>
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/data/kategori-fasilitas/{{ $data->id }}/edit"
@@ -56,6 +62,7 @@
                 <tfoot class="bg-primary">
                     <tr>
                         <th class="text-white">Nama Kategori Fasilitas</th>
+                        <th class="text-white">Warna</th>
                         <th class="text-white">Aksi</th>
                     </tr>
                 </tfoot>
@@ -70,8 +77,10 @@
         $('#myTable').DataTable({
             scrollX: true,
             columns: [ 
-                { "width": "85%" }, 
+                { "width": "70%" }, 
                 null, 
+                { "width": "10%" }, 
+
             ] 
         });
     });

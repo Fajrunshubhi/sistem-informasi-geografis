@@ -16,13 +16,24 @@
                         <form method="post" action="/admin/data/kategori-fasilitas">
                             @csrf
                             <div class="row mb-3">
-                                <div class="col-12">
+                                <div class="col-md-8">
                                     <label class="form-label" for="nama-kategori-fasilitas">Nama Kategori Fasilitas
                                     </label>
                                     <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                         id="nama-kategori-fasilitas" placeholder="Nama" autofocus
                                         value="{{ old('nama') }}" name="nama" />
                                     @error ('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="warna-kategori-fasilitas"
+                                        class="col-md-10 form-label @error('warna') is-invalid @enderror">Warna</label>
+                                    <input class="form-control" type="color" id="warna-kategori-fasilitas" name="warna"
+                                        required value="{{ old('warna') }}" />
+                                    @error ('warna')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
