@@ -10,3 +10,6 @@
 .deskripsi-container * {
     text-align: justify !important;
 }
+.custom-popup {
+    min-width: 450px;
+}

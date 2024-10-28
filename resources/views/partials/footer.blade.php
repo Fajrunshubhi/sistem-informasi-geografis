@@ -48,8 +48,8 @@
                         <h6 class="text-uppercase mb-4 font-weight-bold text-white">Kecamatan {{
                             $profil_kecamatan->nama }}
                         </h6>
-                        <a class="text-white" href="https://kec-ngombol.purworejokab.go.id/" target="_blank">Website <i
-                                class="bi bi-arrow-right-square-fill"></i></a>
+                        <p> <a class="text-white" href="https://kec-ngombol.purworejokab.go.id/" target="_blank">Website
+                                <i class="bi bi-arrow-right-square-fill"></i></a></p>
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1175.1359023344144!2d109.96343064362523!3d-7.8246806303563625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ae7e594c53a93%3A0x4eedeabc1f7f0457!2sKantor%20Kecamatan%20Ngombol!5e0!3m2!1sid!2sid!4v1723828780559!5m2!1sid!2sid"
                             width="200" height="150" style="border:0;" allowfullscreen="" loading="lazy"
