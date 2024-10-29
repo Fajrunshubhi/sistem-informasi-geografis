@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="table-responsive px-2">
-            <table id="myTable" class="table table-hover align-middle table-responsive" style="width:175%">
+            <table id="myTable" class="table table-hover align-middle table-responsive"
+                style="width:175%; font-size: 14px;">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white"></th>
@@ -102,49 +103,53 @@
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>ID</strong></div>
-                                            <div class="col-6">: {{ $data->id }}</div>
+                                            <div class="col-4"><strong>ID</strong></div>
+                                            <div class="col-8">{{ $data->id }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Desa </strong></div>
-                                            <div class="col-6">: {{ $data->pasien->desa->nama_desa }}</div>
+                                            <div class="col-4"><strong>Desa </strong></div>
+                                            <div class="col-8">{{ $data->pasien->desa->nama_desa }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Penyakit</strong></div>
-                                            <div class="col-6">: {{ $data->penyakit->nama_penyakit }}</div>
+                                            <div class="col-4"><strong>Penyakit</strong></div>
+                                            <div class="col-8">{{ $data->penyakit->nama_penyakit }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Nama Pasien</strong></div>
-                                            <div class="col-6">: {{ $data->pasien->nama }}</div>
+                                            <div class="col-4"><strong>NIK</strong></div>
+                                            <div class="col-8">{{ $data->pasien_id }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Umur</strong></div>
-                                            <div class="col-6">: {{ $data->pasien->umur }} Tahun</div>
+                                            <div class="col-4"><strong>Nama Pasien</strong></div>
+                                            <div class="col-8">{{ $data->pasien->nama }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Jenis Kelamin</strong></div>
-                                            <div class="col-6">: {{ $data->pasien->jenis_kelamin }}</div>
+                                            <div class="col-4"><strong>Umur</strong></div>
+                                            <div class="col-8">{{ $data->pasien->umur }} Tahun</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>No HP</strong></div>
-                                            <div class="col-6">: {{ $data->pasien->no_tlpn }}</div>
+                                            <div class="col-4"><strong>Jenis Kelamin</strong></div>
+                                            <div class="col-8">{{ $data->pasien->jenis_kelamin }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Alamat</strong></div>
-                                            <div class="col-6">: {{ $data->pasien->alamat }}</div>
+                                            <div class="col-4"><strong>No HP</strong></div>
+                                            <div class="col-8">{{ $data->pasien->no_tlpn }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Waktu Terdeteksi</strong></div>
-                                            <div class="col-6">: {{ $hari }}, {{ $tanggalFormatted }} {{ $bulan }} {{
-                                                $tahun }} <br> - Jam: {{ $jam }}</div>
+                                            <div class="col-4"><strong>Alamat</strong></div>
+                                            <div class="col-8">{{ $data->pasien->alamat }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Latitude</strong></div>
-                                            <div class="col-6">: {{ $data->latitude }}</div>
+                                            <div class="col-4"><strong>Waktu Terdeteksi</strong></div>
+                                            <div class="col-8">{{ $hari }}, {{ $tanggalFormatted }} {{ $bulan }} {{
+                                                $tahun }} <br> - Jam{{ $jam }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Longitude</strong></div>
-                                            <div class="col-6">: {{ $data->longitude }}</div>
+                                            <div class="col-4"><strong>Latitude</strong></div>
+                                            <div class="col-8">{{ $data->latitude }}</div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-4"><strong>Longitude</strong></div>
+                                            <div class="col-8">{{ $data->longitude }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +217,7 @@
                 null,
                 { "width": "1%" },
                 null, 
-                null, 
+                { "width": "5%" },
                 null, 
                 null, 
                 null,

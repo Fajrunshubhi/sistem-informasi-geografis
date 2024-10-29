@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="table-responsive px-2">
-            <table id="myTable" class="table table-hover align-middle table-responsive" style="width:100%">
+            <table id="myTable" class="table table-hover align-middle table-responsive"
+                style="width:100%; font-size: 14px;">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white"></th>
@@ -31,6 +32,7 @@
                         <th class="text-white">Gejala</th>
                         <th class="text-white">Pengobatan</th>
                         <th class="text-white">Pencegahan</th>
+                        <th class="text-white">Warna</th>
                         <th class="text-white">Aksi</th>
                     </tr>
                 </thead>
@@ -49,17 +51,22 @@
                             : $data->deskripsi)
                             }}</td>
                         <td>{{ $data->kategori }}</td>
-                        <td>{{ (str_word_count($data->gejala) > 10 ? substr($data->gejala,0,75)."..."
+                        <td>{!! (str_word_count($data->gejala) > 10 ? substr($data->gejala,0,75)."..."
                             : $data->gejala)
-                            }}</td>
-                        <td>{{ (str_word_count($data->metode_pengobatan) > 10 ?
+                            !!}</td>
+                        <td>{!! (str_word_count($data->metode_pengobatan) > 10 ?
                             substr($data->metode_pengobatan,0,75)."..."
                             : $data->metode_pengobatan)
-                            }}</td>
-                        <td>{{ (str_word_count($data->tindakan_pencegahan) > 10 ?
+                            !!}</td>
+                        <td>{!! (str_word_count($data->tindakan_pencegahan) > 10 ?
                             substr($data->tindakan_pencegahan,0,75)."..."
                             : $data->tindakan_pencegahan)
-                            }}</td>
+                            !!}</td>
+                        <td>
+                            <div class="kotak-warna rounded-lg"
+                                style="background-color: {{ $data->warna }}; width: 100%; height: 70px; border-radius: 10px">
+                            </div>
+                        </td>
                         <td>
                             <div class="container-aksi align-items-center">
                                 <a href="/admin/penyakit/{{ $data->id }}/edit" class="badge bg-warning d-block mb-2"><i
@@ -88,28 +95,28 @@
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Nama Penyakit</strong></div>
-                                            <div class="col-6">: {{ $data->nama_penyakit }}</div>
+                                            <div class="col-4"><strong>Nama Penyakit</strong></div>
+                                            <div class="col-8">{{ $data->nama_penyakit }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Deskripsi</strong></div>
-                                            <div class="col-6">: {!! $data->deskripsi !!}</div>
+                                            <div class="col-4"><strong>Deskripsi</strong></div>
+                                            <div class="col-8">{!! $data->deskripsi !!}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Kategori</strong></div>
-                                            <div class="col-6">: {{ $data->kategori }}</div>
+                                            <div class="col-4"><strong>Kategori</strong></div>
+                                            <div class="col-8">{{ $data->kategori }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Gejala</strong></div>
-                                            <div class="col-6">: {!! $data->gejala !!}</div>
+                                            <div class="col-4"><strong>Gejala</strong></div>
+                                            <div class="col-8">{!! $data->gejala !!}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Metode Pengobatan</strong></div>
-                                            <div class="col-6">:{!! $data->metode_pengobatan !!}</div>
+                                            <div class="col-4"><strong>Metode Pengobatan</strong></div>
+                                            <div class="col-8">{!! $data->metode_pengobatan !!}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Tindakan Pencegahan</strong></div>
-                                            <div class="col-6">: {!! $data->tindakan_pencegahan !!}</div>
+                                            <div class="col-4"><strong>Tindakan Pencegahan</strong></div>
+                                            <div class="col-8">{!! $data->tindakan_pencegahan !!}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,6 +159,7 @@
                         <th class="text-white">Gejala</th>
                         <th class="text-white">Pengobatan</th>
                         <th class="text-white">Pencegahan</th>
+                        <th class="text-white">Warna</th>
                         <th class="text-white">Aksi</th>
                     </tr>
                 </tfoot>

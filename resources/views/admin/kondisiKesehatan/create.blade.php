@@ -57,7 +57,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label d-block" for="waktu_terdeteksi"> Waktu Layanan </label>
+                                    <label class="form-label d-block" for="waktu_terdeteksi"> Waktu Terdeteksi </label>
                                     <input class="form-control @error('waktu_terdeteksi') is-invalid @enderror"
                                         type="datetime-local" value="{{ old('waktu_terdeteksi') }}"
                                         id="waktu_terdeteksi" name="waktu_terdeteksi" required />

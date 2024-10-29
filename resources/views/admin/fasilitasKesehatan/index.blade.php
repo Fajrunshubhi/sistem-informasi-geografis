@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="table-responsive px-2">
-            <table id="myTable" class="table table-hover align-middle table-responsive" style="width:120%">
+            <table id="myTable" class="table table-hover align-middle table-responsive"
+                style="width:120%; font-size: 14px;">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white"></th>

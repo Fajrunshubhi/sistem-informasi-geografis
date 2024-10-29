@@ -53,12 +53,23 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-12">
+                                <div class="col-8">
                                     <label class="form-label" for="deskripsi">Deskripsi</label>
                                     <textarea id="deskripsi" name="deskripsi"
                                         class="form-control @error('deskripsi') is-invalid @enderror"
                                         placeholder="Deskripsi" required>{{ old('deskripsi') }}</textarea>
                                     @error ('deskripsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="warna-penyakit"
+                                        class="col-md-10 form-label @error('warna') is-invalid @enderror">Warna</label>
+                                    <input class="form-control" type="color" id="warna-penyakit" name="warna" required
+                                        value="{{ old('warna') }}" />
+                                    @error ('warna')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -125,6 +136,8 @@
         $('.select').select2({
             width: 'resolve'
         });
+        $('#nama-penyakit').focus();
+        window.scrollTo(0, 0);
     });
 </script>
 @endpush

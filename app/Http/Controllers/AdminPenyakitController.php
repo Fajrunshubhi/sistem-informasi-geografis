@@ -54,6 +54,7 @@ class AdminPenyakitController extends Controller
             'gejala' => ['required'],
             'metode_pengobatan' => ['required'],
             'tindakan_pencegahan' => ['required'],
+            'warna' => ['required']
         ]);
 
         $exists = Penyakit::where('nama_penyakit', $validatedData['nama_penyakit'])
@@ -100,6 +101,11 @@ class AdminPenyakitController extends Controller
             'metode_pengobatan' => ['required'],
             'tindakan_pencegahan' => ['required'],
         ]);
+
+        if ($request->warna != $penyakit->warna) {
+            $request->validate(['warna' => ['required']]);
+            $validatedData['warna'] = $request->warna;
+        }
         $exists = Penyakit::where('nama_penyakit', $validatedData['nama_penyakit'])
             ->where('id', '!=', $penyakit->id)
             ->exists();
