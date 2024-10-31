@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="table-responsive px-2">
-            <table id="myTable" class="table table-hover align-middle table-responsive" style="width: 175%">
+            <table id="myTable" class="table table-hover align-middle table-responsive"
+                style="width: 175%; font-size: 14px;">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white"></th>
@@ -134,7 +135,7 @@
                                             <div class="col-6">: {{ $data->kondisi_kesehatan->pasien->alamat }}</div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-6"><strong>Waktu Layanan</strong></div>
+                                            <div class="col-6"><strong>Waktu Pemantauan</strong></div>
                                             <div class="col-6">: {{ $hari }}, {{ $tanggalFormatted }} {{ $bulan }} {{
                                                 $tahun }} Pukul {{ $jam }}</div>
                                         </div>
