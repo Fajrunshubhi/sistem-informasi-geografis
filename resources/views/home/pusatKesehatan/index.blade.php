@@ -83,13 +83,6 @@
         let {{ $data->nama_desa }} = L.layerGroup().addTo(map);
     @endforeach
 
-    // Memasukan layer group ke overlayer sesuai dengan isinya
-    let overLayer = {
-        @foreach ($desa as $data)
-            "Desa {{ $data->nama_desa }}" : {{ $data->nama_desa }},
-        @endforeach
-    }
-
     // List map
     let baseMaps = {
         "OpenStreetMap": osm,
@@ -114,7 +107,7 @@
                 color: '{{ $data->warna }}',
                 fillOpacity: 0.1
             }
-        }).addTo({{ $data->nama_desa }});
+        }).bindPopup("Desa {{ $data->nama_desa }}").addTo({{ $data->nama_desa }});
     @endforeach
 
     // Simpan marker pusat kesehatan dalam objek
@@ -229,7 +222,132 @@
         {{ $data->nama_desa }}.on('remove', updatePusatKesehatanVisibility);
     @endforeach
     
+    // HEAT MAP 
+    let heatMapDataPerDesa = {};
+    @foreach ($desa as $data)
+        // Inisialisasi heatmapData untuk desa
+        heatMapDataPerDesa[{{ $data->id }}] = [];
+    @endforeach
 
+    @foreach ($pusat_kesehatan as $data)
+        heatMapDataPerDesa[{{ $data->desa_id }}].push([{{ $data->latitude }}, {{ $data->longitude }}, 2]);
+    @endforeach
+
+    // Objek untuk menyimpan layer heatmap per desa
+    let heatmapLayers = {};
+
+    // Membangun heatmap layer per desa
+    @foreach ($desa as $data)
+        let heatLayer{{ $data->id }} = L.heatLayer(heatMapDataPerDesa[{{ $data->id }}], {
+            radius: 25,
+            blur: 15,
+            maxZoom: 17,
+            gradient: {
+                0.4: 'blue',
+                0.65: 'lime',
+                1: '{{ $data->warna }}' // Sesuaikan dengan warna desa
+            }
+        });
+        // Simpan heatmap layer dalam objek untuk desa ini
+        heatmapLayers[{{ $data->id }}] = heatLayer{{ $data->id }};
+    @endforeach
+
+    // Fungsi untuk mengupdate visibilitas heatmap berdasarkan desa
+    function updateHeatmapVisibility() {
+        @foreach ($desa as $data)
+            if (map.hasLayer({{ $data->nama_desa }})) {
+                // Jika layer desa aktif, tambahkan heatmap untuk desa ini
+                heatmapLayers[{{ $data->id }}].addTo(map);
+            } else {
+                // Jika layer desa tidak aktif, hapus heatmap untuk desa ini
+                heatmapLayers[{{ $data->id }}].remove();
+            }
+        @endforeach
+    }
+
+    // Menambahkan event untuk menambahkan dan menghapus heatmap berdasarkan layer desa
+    @foreach ($desa as $data)
+        {{ $data->nama_desa }}.on('add', updateHeatmapVisibility);
+        {{ $data->nama_desa }}.on('remove', updateHeatmapVisibility);
+    @endforeach
+
+
+    // Membuat tombol kontrol heatmap
+    let HeatmapControl = L.Control.extend({
+        options: {
+            position: 'topleft' // Posisi kontrol di kiri atas
+        },
+
+        onAdd: function(map) {
+            let button = L.DomUtil.create('button', 'leaflet-control-heatmap');
+            button.innerHTML = 'HeatMap'; // Menampilkan teks atau ikon pada tombol
+            button.title = "Toggle Heatmap"; // Tooltip saat hover
+            button.style = 'border-radius:8px; border: none; background-color: white; padding: 8px; cursor: pointer;';
+
+            // Ketika tombol diklik, jalankan fungsi toggleHeatmap
+            L.DomEvent.on(button, 'click', this._toggleHeatmap.bind(this));
+
+            return button;
+        },
+
+        _toggleHeatmap: function() {
+            let isHeatmapVisible = false;
+            // Cek apakah ada heatmap layer yang aktif
+            @foreach ($desa as $data)
+                if (map.hasLayer(heatmapLayers[{{ $data->id }}])) {
+                    isHeatmapVisible = true;
+                }
+            @endforeach
+            // Logika toggle heatmap dan marker
+            if (isHeatmapVisible) {
+                // Jika heatmap sudah aktif, hapus semua heatmap dan tampilkan marker
+                @foreach ($desa as $data)
+                    map.removeLayer(heatmapLayers[{{ $data->id }}]); // Hapus heatmap untuk desa ini
+                @endforeach
+
+                // Tampilkan kembali semua marker
+                @foreach ($desa as $data)
+                    pusatKesehatanMarkers[{{ $data->id }}].forEach(marker => marker.addTo(pusatKesehatan)); // Tampilkan marker desa ini
+                @endforeach
+            } else {
+                // Jika heatmap belum aktif, tampilkan heatmap untuk desa yang aktif
+                @foreach ($desa as $data)
+                    map.addLayer(heatmapLayers[{{ $data->id }}]); // Tampilkan heatmap untuk desa ini
+                @endforeach
+
+                // Sembunyikan marker saat heatmap aktif
+                @foreach ($desa as $data)
+                    pusatKesehatanMarkers[{{ $data->id }}].forEach(marker => pusatKesehatan.removeLayer(marker)); // Sembunyikan marker desa ini
+                @endforeach
+            }
+        }
+    });
+
+    // Menambahkan kontrol heatmap ke peta
+    map.addControl(new HeatmapControl());
+
+
+    let overLayer = {
+        @foreach ($desa as $data)
+            "Desa {{ $data->nama_desa }}" : {{ $data->nama_desa }},
+        @endforeach
+        // "Tampilkan HeatMap" : heatLayer
+    }
+    // Menambahkan heatmap layers ke objek overlay
+    @foreach ($desa as $data)
+        overLayer["Heatmap " + "{{ $data->nama_desa }}"] = heatmapLayers[{{ $data->id }}];
+    @endforeach
+
+
+    L.Routing.control({
+    waypoints: [
+        L.latLng(57.77687684, 11.97987984),
+        L.latLng(89.12313, 11.9493131)
+    ]
+    }).addTo(map);
+    L.latLng(-7.828557854922326, 109.9393682517317),
+            L.latLng(7.836618426574526, 109.94533447712078)
+    
     let layerControl = L.control.layers(baseMaps, overLayer).addTo(map);
 
     layerControl.addOverlay(pusatKesehatan, "Pusat Kesehatan");

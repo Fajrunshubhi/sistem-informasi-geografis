@@ -243,6 +243,155 @@
 
     @endforeach   
 
+    // HEAT MAP 
+    // Objek untuk menyimpan data heatmap berdasarkan nama penyakit
+    let heatMapDataPerPenyakit = {};
+    let heatMapDataPerKategori ={        
+        "Menular" : [],
+        "Tidak Menular" : []
+    };
+    @foreach ($penyakit as $data)
+        heatMapDataPerPenyakit[{{ $data->id }}] = [];
+    @endforeach
+
+    @foreach ($kondisi_kesehatan as $data)
+        heatMapDataPerPenyakit[{{ $data->penyakit_id }}].push([{{ $data->latitude }}, {{ $data->longitude }}, 1]);
+        heatMapDataPerKategori["{{ $data->penyakit->kategori }}"].push([{{ $data->latitude }}, {{ $data->longitude }}, 1]);
+    @endforeach
+
+    // Objek untuk menyimpan layer heatmap
+    let heatmapLayers = {};
+
+    // Membuat heatmap untuk setiap penyakit
+    @foreach ($penyakit as $data)
+        let heatLayerPenyakit{{ $data->id }} = L.heatLayer(heatMapDataPerPenyakit[{{ $data->id }}], {
+            radius: 25,
+            blur: 15,
+            maxZoom: 17,
+            gradient: {
+                0.4: 'blue',
+                0.65: 'lime',
+                1: '{{ $data->warna }}'
+            }
+        });
+
+        // Simpan heatmap per penyakit
+        heatmapLayers["penyakit_{{ $data->id }}"] = heatLayerPenyakit{{ $data->id }};
+    @endforeach
+
+    @foreach ($penyakit as $data)
+        (function() {
+            let ktgr = "{{ $data->kategori }}";  // Misalnya "Tidak Menular"
+            let kategori = ktgr.split(" ")[0];
+            let heatLayerKey = `kategori_${kategori}`;
+            let warnaKategori = ""
+            if (ktgr == "Menular"){
+                warnaKategori = "red";
+            } else {
+                warnaKategori = "blue";
+            }
+            let heatLayer = L.heatLayer(heatMapDataPerKategori["{{ $data->kategori }}"], {
+                radius: 25,
+                blur: 15,
+                maxZoom: 17,
+                gradient: {
+                    0.4: 'blue',
+                    0.65: 'lime',
+                    1: warnaKategori
+                }
+            });
+            // Simpan heatmap per kategori menular atau tidak menular
+            heatmapLayers[heatLayerKey] = heatLayer;
+        })();
+    @endforeach
+
+
+
+    // Fungsi untuk mengupdate visibilitas heatmap berdasarkan layer
+    function updateHeatmapVisibility() {
+        // Mengecek setiap penyakit
+        @foreach ($penyakit as $data)
+            (function(){
+                if (map.hasLayer(penyakit{{ $data->id }})) {
+                    // Jika kategori penyakit aktif
+                    if (!map.hasLayer(heatmapLayers["penyakit_{{ $data->id }}"])) {
+                        map.removeLayer(heatmapLayers["penyakit_{{ $data->id }}"]);
+                    }
+                } else {
+                    // Jika penyakit tidak aktif
+                    if (map.hasLayer(heatmapLayers["penyakit_{{ $data->id }}"])) {
+                        map.addLayer(heatmapLayers["penyakit_{{ $data->id }}"]);
+                    }
+                }
+            })();
+        @endforeach
+    }
+
+    // Fungsi untuk menangani perubahan layer penyakit
+    @foreach ($penyakit as $data)
+        penyakit{{ $data->id }}.on('add', updateHeatmapVisibility);   // Ketika kategori ditambahkan
+        penyakit{{ $data->id }}.on('remove', updateHeatmapVisibility); // Ketika kategori dihapus
+    @endforeach
+
+    // Menambahkan tombol kontrol heatmap
+    let HeatmapControl = L.Control.extend({
+        options: {
+            position: 'topleft'
+        },
+        onAdd: function(map) {
+            let button = L.DomUtil.create('button', 'leaflet-control-heatmap');
+            button.innerHTML = 'HeatMap';
+            button.title = "Toggle Heatmap";
+            button.style = 'border-radius:8px; border: none; background-color: white; padding: 8px; cursor: pointer;';
+            
+            // Ketika tombol diklik, jalankan fungsi toggleHeatmap
+            L.DomEvent.on(button, 'click', this._toggleHeatmap.bind(this));
+            
+            return button;
+        },
+        _toggleHeatmap: function() {
+            let isHeatmapVisible = false;
+
+            // Cek apakah ada heatmap layer yang aktif
+            @foreach ($penyakit as $data)
+                if (map.hasLayer(heatmapLayers["penyakit_{{ $data->id }}"])) {
+                    isHeatmapVisible = true;
+                }
+            @endforeach 
+
+            // Logika toggle heatmap dan marker
+            if (isHeatmapVisible) {
+
+                // Hapus heatmap dan sembunyikan marker
+                @foreach ($penyakit as $data)
+                    var ktgr = "{{ $data->kategori }}";
+                    var kategori = ktgr.split(" ")[0];
+                    var heatLayerKey = `kategori_${kategori}`;
+                    map.removeLayer(heatmapLayers["penyakit_{{ $data->id }}"]);
+                    map.removeLayer(heatmapLayers[heatLayerKey]);
+                @endforeach
+
+                // tampilkan semua marker
+                @foreach ($kondisi_kesehatan as $data)
+                    map.addLayer(marker{{ $data->id }});
+                @endforeach
+            } else {
+                // Tampilkan heatmap dan sembunyikan marker
+                @foreach ($penyakit as $data)
+                    map.addLayer(heatmapLayers["penyakit_{{ $data->id }}"]);
+                @endforeach
+
+                // sembunyikan kembali marker
+                @foreach ($kondisi_kesehatan as $data)
+                    map.removeLayer(marker{{ $data->id }});
+                @endforeach
+            }
+        }
+    });
+
+    // Menambahkan kontrol heatmap ke peta
+    map.addControl(new HeatmapControl());
+
     // Memasukan layer group ke overlayer sesuai dengan isinya
     let overLayer = {
         @foreach ($desa as $data)
@@ -254,7 +403,32 @@
             "<span style='background-color: {{ $data->warna }}; width: 15px; height: 15px; display: inline-block; margin-left: 3px; margin-right: 5px; border-radius: 100%;'></span> {{ $data->nama_penyakit }}" : penyakit{{ $data->id }},
         @endforeach
     }
+
+    // Menambahkan heatmap layers ke objek overlay
+    @foreach ($penyakit as $data)     
+            // Menambahkan key berdasarkan nama penyakit
+            overLayer["Heatmap " + "{{ $data->nama_penyakit }}"] = heatmapLayers["penyakit_{{ $data->id }}"];
+    @endforeach
     
+    @foreach ($penyakit as $data)
+        (function(){
+            let ktgr = "{{ trim($data->kategori) }}";  // Pastikan tidak ada spasi ekstra
+            let kategori = ktgr.split(" ")[0];  // Ambil kata pertama dari kategori
+            let heatLayerKey = `kategori_${kategori}`;
+            let warna = "";  // Definisikan warna dengan nilai default kosong
+            
+            // Periksa kategori dan tentukan warna
+            if (ktgr === "Menular") {
+                warna = "red";
+            } else {
+                warna = "blue";
+            }
+            
+            // Menambahkan key kategori berdasarkan kategori
+            overLayer[`Heatmap ${ktgr} <span style="background-color: ${warna}; width: 15px; height: 15px; display: inline-block; margin-left: 3px; margin-right: 5px; border-radius: 100%; margin-top: 16px;"></span>`] = heatmapLayers[heatLayerKey];
+        })();
+    @endforeach
+
     let layerControl = L.control.layers(baseMaps, overLayer).addTo(map);
 
 

@@ -201,6 +201,126 @@
             .addTo(kategoriFasilitas{{ $data->kategori_id }});
     @endforeach   
 
+
+    // HEAT MAP 
+    let heatMapDataPerKategori = {};
+    @foreach ($kategori_fasilitas as $data)
+        heatMapDataPerKategori[{{ $data->id }}] = [];
+    @endforeach
+
+    @foreach ($fasilitas_kesehatan as $data)
+        heatMapDataPerKategori[{{ $data->kategori_id }}].push([{{ $data->latitude }}, {{ $data->longitude }}, 1]);
+    @endforeach
+
+    // Objek untuk menyimpan layer heatmap per kategori
+    let heatmapLayers = {};
+
+    // Membuat heatmap untuk setiap kategori fasilitas
+    @foreach ($kategori_fasilitas as $data)
+        let heatLayerKategori{{ $data->id }} = L.heatLayer(heatMapDataPerKategori[{{ $data->id }}], {
+            radius: 25,
+            blur: 15,
+            maxZoom: 17,
+            gradient: {
+                0.4: 'blue',
+                0.65: 'lime',
+                1: '{{ $data->warna }}'
+            }
+        });
+
+        // Simpan heatmap per kategori dalam objek
+        heatmapLayers["kategori_{{ $data->id }}"] = heatLayerKategori{{ $data->id }};
+    @endforeach
+
+    // Fungsi untuk mengupdate visibilitas heatmap berdasarkan layer
+    function updateHeatmapVisibility() {
+        // Mengecek setiap kategori fasilitas kesehatan
+        @foreach ($kategori_fasilitas as $data)
+            // Cek apakah layer kategori aktif
+            if (map.hasLayer(kategoriFasilitas{{ $data->id }})) {
+                // Jika kategori fasilitas aktif
+                if (!map.hasLayer(heatmapLayers["kategori_{{ $data->id }}"])) {
+                    map.addLayer(heatmapLayers["kategori_{{ $data->id }}"]);
+                }
+            } else {
+                // Jika kategori fasilitas tidak aktif
+                if (map.hasLayer(heatmapLayers["kategori_{{ $data->id }}"])) {
+                    map.removeLayer(heatmapLayers["kategori_{{ $data->id }}"]);
+                }
+            }
+        @endforeach
+    }
+
+    // Fungsi untuk menangani perubahan status kategori
+    @foreach ($kategori_fasilitas as $data)
+        kategoriFasilitas{{ $data->id }}.on('add', updateHeatmapVisibility);   // Ketika kategori ditambahkan
+        kategoriFasilitas{{ $data->id }}.on('remove', updateHeatmapVisibility); // Ketika kategori dihapus
+    @endforeach
+
+    // Menambahkan event untuk menambahkan dan menghapus heatmap berdasarkan layer desa
+    @foreach ($desa as $data)
+        {{ $data->nama_desa }}.on('add', updateHeatmapVisibility);
+        {{ $data->nama_desa }}.on('remove', updateHeatmapVisibility);
+    @endforeach
+
+
+    // Menambahkan tombol kontrol heatmap
+    let HeatmapControl = L.Control.extend({
+        options: {
+            position: 'topleft'
+        },
+        onAdd: function(map) {
+            let button = L.DomUtil.create('button', 'leaflet-control-heatmap');
+            button.innerHTML = 'HeatMap';
+            button.title = "Toggle Heatmap";
+            button.style = 'border-radius:8px; border: none; background-color: white; padding: 8px; cursor: pointer;';
+            
+            // Ketika tombol diklik, jalankan fungsi toggleHeatmap
+            L.DomEvent.on(button, 'click', this._toggleHeatmap.bind(this));
+            
+            return button;
+        },
+        _toggleHeatmap: function() {
+            let isHeatmapVisible = false;
+
+            // Cek apakah ada heatmap layer yang aktif
+            @foreach ($kategori_fasilitas as $data)
+                if (map.hasLayer(heatmapLayers["kategori_{{ $data->id }}"])) {
+                    isHeatmapVisible = true;
+                }
+            @endforeach 
+
+            // Logika toggle heatmap dan marker
+            if (isHeatmapVisible) {
+                console.log("heat map tidak aktif");
+
+                // Hapus heatmap dan sembunyikan marker
+                @foreach ($kategori_fasilitas as $data)
+                    map.removeLayer(heatmapLayers["kategori_{{ $data->id }}"]);
+                @endforeach
+
+                // Sembunyikan semua marker
+                @foreach ($fasilitas_kesehatan as $data)
+                    map.addLayer(marker{{ $data->id }});
+                @endforeach
+            } else {
+                console.log("heat map aktif");
+                // Tampilkan heatmap dan sembunyikan marker
+                @foreach ($kategori_fasilitas as $data)
+                    map.addLayer(heatmapLayers["kategori_{{ $data->id }}"]);
+                @endforeach
+
+                // Tampilkan kembali marker
+                @foreach ($fasilitas_kesehatan as $data)
+                    map.removeLayer(marker{{ $data->id }});
+                @endforeach
+            }
+        }
+    });
+
+    // Menambahkan kontrol heatmap ke peta
+    map.addControl(new HeatmapControl());
+
     // Memasukan layer group ke overlayer sesuai dengan isinya
     let overLayer = {
         @foreach ($desa as $data)
@@ -210,9 +330,13 @@
             "<span style='background-color: {{ $data->warna }}; width: 15px; height: 15px; display: inline-block; margin-left: 3px; margin-right: 5px; border-radius: 100%;'></span> {{ $data->nama }}" : kategoriFasilitas{{ $data->id }},
         @endforeach
     }
+
+    // Menambahkan heatmap layers ke objek overlay
+    @foreach ($kategori_fasilitas as $data)
+        overLayer["Heatmap " + "{{ $data->nama }}"] = heatmapLayers["kategori_{{ $data->id }}"];
+    @endforeach
     
     let layerControl = L.control.layers(baseMaps, overLayer).addTo(map);
-
 
 </script>
 @endpush
